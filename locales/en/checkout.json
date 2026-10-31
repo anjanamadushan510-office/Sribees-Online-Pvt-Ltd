@@ -1,0 +1,54 @@
+{
+  "header": {
+    "title": "Express Order Checkout",
+    "subtitle": "Review items, select SriBees Express delivery slot & choose payment method",
+    "backToShop": "Continue Shopping"
+  },
+  "cartItems": {
+    "title": "Cart Items",
+    "clearCart": "Clear Cart",
+    "emptyNotice": "Your shopping cart is currently empty.",
+    "emptyCta": "Start Shopping"
+  },
+  "delivery": {
+    "addressTitle": "Delivery Address",
+    "changeAddress": "Change",
+    "addAddress": "Add New Address",
+    "slotTitle": "Delivery Window",
+    "instantSlot": "SriBees Express Dispatch"
+  },
+  "payment": {
+    "title": "Payment Method",
+    "cod": "Cash on Delivery (COD)",
+    "card": "Credit / Debit Card",
+    "wallet": "SRIBEES Wallet",
+    "walletBalance": "Available Balance:"
+  },
+  "summary": {
+    "title": "Order Summary",
+    "subtotal": "Subtotal",
+    "deliveryFee": "Delivery Fee",
+    "discount": "Promotional Discount",
+    "total": "Estimated Total",
+    "placeOrder": "Place Order Now",
+    "placingOrder": "Processing Order..."
+  },
+  "modal": {
+    "successTitle": "Order Confirmed!",
+    "successSubtitle": "Your order has been routed to the nearest branch hub.",
+    "trackOrder": "Track Order",
+    "home": "Back to Home"
+  },
+  "sidebar": {
+    "promoTitle": "Promotional Coupon",
+    "promoPlaceholder": "Enter promo code (e.g. SRIBEEFEST)",
+    "apply": "Apply",
+    "applyMax": "Apply Max",
+    "needHelp": "Need Help with Checkout?",
+    "chat": "Chat",
+    "ecoPackaging": "Eco-Packaging Fee",
+    "freshGuarantee": "100% Fresh Guarantee",
+    "contactless": "Contactless Delivery",
+    "liveTrack": "Live Tracking"
+  }
+}

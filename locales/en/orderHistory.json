@@ -1,0 +1,137 @@
+{
+  "breadcrumb": {
+    "account": "My Account",
+    "orderHistory": "Order History & Tracking"
+  },
+  "header": {
+    "badge": "ORDER HISTORY",
+    "title": "Your Orders",
+    "subtitle": "Track current express deliveries or reorder your favorite items in seconds."
+  },
+  "search": {
+    "placeholder": "Search by Order ID (e.g. SB-89241) or item name...",
+    "reset": "Reset Search"
+  },
+  "timeline": {
+    "label": "Timeline: ",
+    "last7Days": "Last 7 Days",
+    "last30Days": "Last 30 Days",
+    "last90Days": "Last 90 Days",
+    "year2026": "Year 2026",
+    "allTime": "All Time"
+  },
+  "tabs": {
+    "all": "All",
+    "active": "In Progress",
+    "completed": "Delivered",
+    "cancelled": "Cancelled",
+    "returns": "Return"
+  },
+  "card": {
+    "orderId": "Order #",
+    "dateBranch": "Date & Branch",
+    "date": "Date",
+    "placedOn": "Placed on:",
+    "total": "Total:",
+    "items": "Items",
+    "status": "Status",
+    "actions": "Actions",
+    "more": "More",
+    "noItems": "No items details available",
+    "loading": "Loading orders...",
+    "trackBtn": "Track Delivery",
+    "viewDetailsBtn": "View Details",
+    "reorderBtn": "Reorder Items",
+    "returnBtn": "Return Items"
+  },
+  "status": {
+    "orderPlaced": "Order Placed",
+    "confirmed": "Confirmed",
+    "processing": "Processing",
+    "preparingOrder": "Preparing Order",
+    "packed": "Packed",
+    "readyForPickup": "Ready for Pickup",
+    "dispatched": "Dispatched",
+    "outForDelivery": "Out for Delivery",
+    "delivered": "Delivered",
+    "cancelled": "Cancelled",
+    "refunded": "Refunded",
+    "returnRequested": "Return Requested",
+    "returnApproved": "Return Approved",
+    "returnRejected": "Return Rejected",
+    "deliveryFailed": "Delivery Failed"
+  },
+  "returnModal": {
+    "title": "Return Items",
+    "subtitle": "Select items and attach photos to request a return.",
+    "windowCountdown": "Return window closes in",
+    "windowClosed": "Return window has expired (12h limit)",
+    "selectItems": "Select Items to Return",
+    "selectAll": "Return all items",
+    "reasonLabel": "Reason for Return *",
+    "selectReasonPlaceholder": "Select a reason...",
+    "commentsLabel": "Additional Comments",
+    "commentsPlaceholder": "Describe the issue or condition of goods...",
+    "uploadPhotos": "Proof Photos *",
+    "uploadHint": "Upload 1 to 4 clear photos of the damaged or wrong items (max 5MB each).",
+    "uploadBtn": "Upload Photo",
+    "photosCount": "photos uploaded (1 to 4 required)",
+    "submitBtn": "Submit Return Request",
+    "submitting": "Submitting...",
+    "reasons": {
+      "damaged": "Damaged on arrival",
+      "wrong": "Wrong item delivered",
+      "expired": "Expired or spoiled produce",
+      "quality": "Quality not as expected",
+      "other": "Other reason"
+    }
+  },
+  "trackingModal": {
+    "liveTracking": "Live Tracking",
+    "total": "Total",
+    "deliveryAddress": "Delivery Address:",
+    "orderStatus": "Order Status",
+    "fetching": "Fetching live tracking update..."
+  },
+  "detailsModal": {
+    "title": "Order Invoice Details",
+    "placedOn": "Placed on {date}",
+    "downloadInvoice": "Download Invoice",
+    "downloading": "Downloading...",
+    "deliveryAddress": "Delivery Address",
+    "paymentMethod": "Payment Method",
+    "itemDescription": "Item Description",
+    "qty": "Qty",
+    "unitPrice": "Unit Price",
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "deliveryFee": "Delivery Fee",
+    "free": "FREE",
+    "discount": "Discount",
+    "totalAmount": "Total Amount",
+    "cancelOrder": "Cancel Order",
+    "cancelling": "Cancelling...",
+    "requestReturn": "Request Return",
+    "trackOrder": "Track Order",
+    "cancelConfirmTitle": "Cancel this order?",
+    "cancelConfirmDesc": "Are you sure you want to cancel this order? This action cannot be reversed.",
+    "keepOrder": "No, Keep Order",
+    "yesCancel": "Yes, Cancel Order",
+    "writeReview": "Rate & Review",
+    "reviewed": "Reviewed",
+    "rateThisItem": "Rate this item",
+    "reviewPlaceholder": "Write your review about product freshness, packaging, and quality...",
+    "submitReview": "Submit Review",
+    "submitting": "Submitting...",
+    "cancel": "Cancel",
+    "reviewSubmitted": "Review Submitted!",
+    "reviewSubmittedDesc": "Thank you for reviewing {product}!",
+    "reviewFailed": "Failed to submit review",
+    "reviewEmptyComment": "Please enter your review comments."
+  },
+  "empty": {
+    "title": "No orders yet",
+    "subtitle": "Your completed and ongoing grocery deliveries will show up here.",
+    "shopBtn": "Order Groceries Now"
+  }
+}

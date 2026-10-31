@@ -1,0 +1,22 @@
+{
+  "hero": {
+    "badge": "HOT DEALS & OFFERS",
+    "title": "Save Big on Every Order",
+    "desc": "Redeem app coupons, enjoy bank partnership discounts, and grab today's lowest prices.",
+    "viewCoupons": "View Coupons",
+    "viewDeals": "Today's Deals"
+  },
+  "coupons": {
+    "badge": "EXCLUSIVE COUPONS",
+    "title": "Store Discount Coupons",
+    "desc": "Apply these promo codes during checkout to unlock instant discounts.",
+    "copyCode": "Copy Code",
+    "copied": "Copied!",
+    "minOrder": "Min. order"
+  },
+  "deals": {
+    "badge": "FLASH DISCOUNTS",
+    "title": "Today's Special Deals",
+    "desc": "Limited quantity price drops curated daily from local farms & hubs."
+  }
+}

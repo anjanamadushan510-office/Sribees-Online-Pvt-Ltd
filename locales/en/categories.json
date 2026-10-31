@@ -1,0 +1,33 @@
+{
+  "badge": "CATEGORIES",
+  "title": "Shop by Category",
+  "description": "Explore top-rated fresh picks and household essentials picked straight from local hubs.",
+  "searchPlaceholder": "Search categories or sub-items...",
+  "tabs": {
+    "all": "All Departments",
+    "fresh": "Fresh Produce",
+    "pantry": "Pantry & Beverages",
+    "lifestyle": "Household & Personal"
+  },
+  "featured": {
+    "badge": "FRESH SELECTION",
+    "title": "Featured Categories",
+    "description": "Most frequently shopped departments this week across Sri Lanka."
+  },
+  "card": {
+    "explore": "Explore Category",
+    "itemsCount": "items"
+  },
+  "trust": {
+    "qualityTitle": "100% Quality Guarantee",
+    "qualityDesc": "Handpicked and freshness checked at every hub",
+    "coldChainTitle": "SriBees Express Logistics",
+    "coldChainDesc": "Carefully handled and packed for maximum freshness",
+    "speedTitle": "SriBees Express Delivery",
+    "speedDesc": "Fast delivery straight to your doorstep"
+  },
+  "empty": {
+    "title": "No categories found",
+    "description": "Try searching with a different keyword or reset filters."
+  }
+}

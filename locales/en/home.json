@@ -1,0 +1,60 @@
+{
+  "hero": {
+    "defaultSubtitle": "Fast & Reliable SriBees Express Delivery",
+    "defaultTitle": "Fresh Groceries Delivered via SriBees Express",
+    "defaultDescription": "Handpicked farm-fresh produce, dairy, meats, and daily essentials straight to your doorstep.",
+    "shopNow": "Shop Now"
+  },
+  "categories": {
+    "badge": "CATEGORIES",
+    "title": "Shop by Category",
+    "description": "Explore top-rated fresh picks and household essentials picked straight from local hubs.",
+    "viewAll": "View All Categories"
+  },
+  "popularPicks": {
+    "badge": "HANDPICKED FRESHNESS",
+    "title": "Quick Sale",
+    "description": "Top-selling daily essentials ordered this week across all SRIBEES hubs.",
+    "viewAll": "View All Products"
+  },
+  "advantage": {
+    "badge": "SRIBEES ADVANTAGE",
+    "title": "Why Shop With SRIBEES?",
+    "description": "The new benchmark for online grocery convenience across Sri Lanka.",
+    "convenient": {
+      "title": "Convenient & Fast",
+      "description": "Shop from 4,000+ items delivered fast via SriBees Express. Avoid shopping runs and long queuing."
+    },
+    "network": {
+      "title": "Multi-Branch Network",
+      "description": "Direct access to your nearest neighborhood branch for fresh goods, home care items, and fun treasures."
+    },
+    "easyOrdering": {
+      "title": "Easy Ordering",
+      "description": "Intuitive search, smart recommendations, instant re-order buttons, and 10-second checkout flow."
+    },
+    "freshEssentials": {
+      "title": "Fresh Essentials",
+      "description": "Strictly temperature-controlled logistics, sorted daily for zero-microbe hygiene and export-grade quality."
+    }
+  },
+  "mobileApp": {
+    "badge": "SRIBEES MOBILE APP & AI ASSISTANT",
+    "titlePart1": "Shop Fresh Groceries",
+    "titleHighlight": "Smarter & Faster",
+    "titlePart2": "on Mobile",
+    "description": "Enjoy Sri Lanka's smartest grocery ordering experience with fast delivery, flexible payment options, SRIBEES Wallet, and an instant AI shopping assistant.",
+    "featureDelivery": "Fast & fresh delivery direct to your doorstep via",
+    "deliveryBrand": "SRIBEES Express",
+    "featurePromo": "App-exclusive promo code",
+    "promoCode": "SRIBEES-APP",
+    "promoDiscount": "(LKR 250 off on orders over LKR 1,000)",
+    "featurePayments": "Seamless Payments: Cash on Delivery (COD), Credit/Debit Cards & SRIBEES Wallet supported.",
+    "featureAiAssistant": "AI Smart Assistant: Instant help finding all the products & groceries you need.",
+    "scanQr": "Scan QR code to install",
+    "downloadOn": "Download on the",
+    "appStore": "App Store",
+    "getItOn": "GET IT ON",
+    "googlePlay": "Google Play"
+  }
+}

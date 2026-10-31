@@ -1,0 +1,111 @@
+{
+  "topHeader": {
+    "promo": "නැවුම් එළවළු, මස් මාළු සහ සියලුම බඩු කෙළින්ම ඔබේ ගෙදරටම ගෙන්වා ගන්න!",
+    "hotline": "ක්ෂණික ඇමතුම්:",
+    "about": "SRIBEES ගැන"
+  },
+  "navbar": {
+    "searchPlaceholder": "සිල්ලර බඩු, කාබනික එළවළු, කිරි, බේකරි ද්‍රව්‍ය මෙතනින් සොයන්න...",
+    "selectHub": "ඔබ ඉන්න ප්‍රදේශය තෝරන්න",
+    "loginRegister": "ඇතුල් වන්න / ලියාපදිංචි වන්න",
+    "account": "මගේ ගිණුම",
+    "cart": "බාස්කට් එක"
+  },
+  "searchBar": {
+    "placeholder": "සිල්ලර බඩු, කාබනික එළවළු, කිරි, බේකරි ද්‍රව්‍ය මෙතනින් සොයන්න...",
+    "searching": "සොයමින් පවතී",
+    "checkingStock": "ශාඛාවේ තොග පරීක්ෂා කරමින්...",
+    "items": "භාණ්ඩ",
+    "item": "භාණ්ඩය",
+    "outOfStock": "තොග අවසන්",
+    "noProductsFound": "ගැලපෙන භාණ්ඩ කිසිවක් හමු නොවීය",
+    "noProductsHint": "වචන නිවැරදිදැයි පරීක්ෂා කරන්න හෝ එළවළු, පලතුරු වැනි පොදු කාණ්ඩයකින් සොයන්න.",
+    "viewAllResults": "සියලු ප්‍රතිඵල බලන්න",
+    "recentSearches": "මෑත සෙවීම්",
+    "clearAll": "සියල්ල මකන්න",
+    "popularSearches": "ජනප්‍රිය සෙවීම්",
+    "hubNotice": "ඔබේ බෙදාහැරීමේ මධ්‍යස්ථානයට අනුව භාණ්ඩ සහ වට්ටම් ස්වයංක්‍රීයව යාවත්කාලීන වේ.",
+    "tags": {
+      "vegetables": "නැවුම් එළවළු",
+      "milk": "කිරි නිෂ්පාදන",
+      "fruits": "දේශීය පලතුරු",
+      "bakery": "බේකරි සහ පාන්",
+      "spices": "ශ්‍රී ලාංකීය කුළුබඩු",
+      "rice": "බාස්මතී සහල්"
+    }
+  },
+  "categoryNav": {
+    "home": "මුල් පිටුව",
+    "shop": "සාප්පු සවාරි",
+    "categories": "කාණ්ඩ",
+    "promotions": "ප්‍රවර්ධන",
+    "trackOrder": "SriBees Express හරහා ඇණවුම සොයාගන්න",
+    "allCategories": "සියලු වර්ග",
+    "freshProduce": "නැවුම් එළවළු සහ පලතුරු",
+    "dairyEggs": "කිරි නිෂ්පාදන සහ බිත්තර",
+    "beverages": "බීම වර්ග",
+    "pantryStaples": "කුස්සියේ අත්‍යවශ්‍ය ද්‍රව්‍ය",
+    "meatSeafood": "මස් සහ මාළු",
+    "snacks": "කෙටි ආහාර සහ පැණිරස",
+    "household": "ගෘහ පිරිසිදුකාරක"
+  },
+  "cartDrawer": {
+    "title": "ඔබේ බාස්කට් එක",
+    "emptyTitle": "ඔබේ බාස්කට් එකේ තවම බඩු නෑ",
+    "emptySubtitle": "කඩෙන් කැමති බඩු ටිකක් බාස්කට් එකට දාගමුද?",
+    "subtotal": "භාණ්ඩ වටිනාකම",
+    "checkout": "ඇණවුම තහවුරු කරන්න",
+    "viewCart": "බාස්කට් එකේ විස්තර බලන්න",
+    "freeDeliveryNotice": "දිවයින පුරා SriBees Express හරහා කඩිනම් බෙදාහැරීම"
+  },
+  "footer": {
+    "tagline": "ශ්‍රී ලංකාවේ සුහුරුම මාර්ගගත සිල්ලර බඩු අත්දැකීම සහ SriBees Express කඩිනම් බෙදාහැරීම.",
+    "hotlineText": "පාරිභෝගික සහය / ඇමතුම්",
+    "deliveryHours": "SriBees Express බෙදාහැරීම් වේලාවන්: සෑම දිනකම උදෑසන 6:00 සිට රාත්‍රී 11:00 දක්වා",
+    "quickLinks": "ප්‍රයෝජනවත් ලින්ක්",
+    "departments": "ප්‍රධාන අංශ",
+    "customerCare": "පාරිභෝගික සත්කාරය",
+    "copyright": "සියලු හිමිකම් ඇවිරිණි. SRIBEES Online (Pvt) Ltd."
+  },
+  "actions": {
+    "addToCart": "බාස්කට් එකට දාන්න",
+    "added": "දැම්මා ✓",
+    "buyNow": "දැන්ම මිලදී ගන්න",
+    "save": "සුරකින්න",
+    "cancel": "අවලංගු කරන්න",
+    "confirm": "ස්ථිර කරන්න",
+    "apply": "භාවිතා කරන්න",
+    "close": "වසන්න",
+    "viewAll": "සියල්ල බලන්න",
+    "inStock": "තොග තිබේ",
+    "outOfStock": "දැනට අවසන් වී ඇත"
+  },
+  "userDropdown": {
+    "myAccount": "මගේ ගිණුම",
+    "myAccountDesc": "පැතිකඩ, ලිපින සහ මුදල් පසුම්බිය",
+    "myOrders": "මගේ ඇණවුම්",
+    "myOrdersDesc": "ඇණවුම් ඉතිහාසය සහ නැවත ඇණවුම් කිරීම",
+    "savedItems": "සුරැකි භාණ්ඩ",
+    "savedItemsDesc": "කැමති සහ මෑතකදී බැලූ භාණ්ඩ",
+    "referEarn": "මිතුරන්ට හඳුන්වා දී දිනන්න",
+    "referEarnDesc": "මිතුරන්ට ආරාධනා කර වට්ටම් ලබාගන්න",
+    "accountSettings": "ගිණුමේ සැකසුම්",
+    "accountSettingsDesc": "ආරක්ෂාව, භාෂාව සහ දැනුම්දීම්",
+    "exploreStore": "වෙළඳසැල ගවේෂණය",
+    "shopAll": "සියලුම භාණ්ඩ බලන්න",
+    "shopAllDesc": "නැවුම් සිල්ලර බඩු සහ අත්‍යවශ්‍ය ද්‍රව්‍ය",
+    "categories": "කාණ්ඩ",
+    "categoriesDesc": "අංශ සහ නිෂ්පාදන අනුව බලන්න",
+    "promotions": "ප්‍රවර්ධන සහ දීමනා",
+    "promotionsDesc": "විශේෂ වට්ටම් සහ දෛනික දීමනා",
+    "hot": "උණුසුම්",
+    "signOut": "ගිණුමෙන් ඉවත් වන්න",
+    "signingOut": "ඉවත් වෙමින් පවතී..."
+  },
+  "mobileAppBanner": {
+    "title": "SRIBEES Online",
+    "subtitle": "ස්මාර්ට් සිල්ලර බඩු ඇප් එක • Google Play",
+    "action": "INSTALL",
+    "close": "වසන්න"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "header": {
+    "badge": "WISHLIST",
+    "title": "Saved Items & Favorites",
+    "subtitle": "Keep track of everyday items and instant restocks.",
+    "addAllBtn": "Add All to Cart",
+    "clearBtn": "Clear List"
+  },
+  "tabs": {
+    "all": "All Saved Items",
+    "priceDrops": "Price Drops",
+    "recentlyViewed": "Recently Viewed"
+  },
+  "empty": {
+    "title": "No saved items yet",
+    "subtitle": "Tap the heart icon on any product to save it here for later.",
+    "shopBtn": "Explore Fresh Goods"
+  },
+  "guest": {
+    "title": "Sign In to Save Your Favorites Permanently",
+    "subtitle": "Keep your wishlist synced across all your devices and get instant notifications when prices drop.",
+    "loginBtn": "Sign In / Register"
+  }
+}

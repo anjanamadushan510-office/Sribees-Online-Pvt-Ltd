@@ -1,0 +1,111 @@
+{
+  "topHeader": {
+    "promo": "Fresh produce, meat & online order delivery at your doorstep!",
+    "hotline": "Hotline:",
+    "about": "About SRIBEES"
+  },
+  "navbar": {
+    "searchPlaceholder": "Search from groceries, organic produce, dairy, bakery, fitness...",
+    "selectHub": "Select Hub",
+    "loginRegister": "Login / Register",
+    "account": "Account",
+    "cart": "Cart"
+  },
+  "searchBar": {
+    "placeholder": "Search from groceries, organic produce, dairy, bakery, fitness...",
+    "searching": "Searching for",
+    "checkingStock": "Checking branch stock...",
+    "items": "items",
+    "item": "item",
+    "outOfStock": "Out of Stock",
+    "noProductsFound": "No products found matching",
+    "noProductsHint": "Try checking your spelling or search by general categories like vegetables, fruit, or dairy.",
+    "viewAllResults": "View all results",
+    "recentSearches": "Recent Searches",
+    "clearAll": "Clear All",
+    "popularSearches": "Popular Searches",
+    "hubNotice": "Catalog items and discounts are automatically refreshed for your delivery hub.",
+    "tags": {
+      "vegetables": "Fresh Vegetables",
+      "milk": "Organic Milk",
+      "fruits": "Tropical Fruits",
+      "bakery": "Bakery & Bread",
+      "spices": "Sri Lankan Spices",
+      "rice": "Basmati Rice"
+    }
+  },
+  "categoryNav": {
+    "home": "Home",
+    "shop": "Shop",
+    "categories": "Categories",
+    "promotions": "Promotions",
+    "trackOrder": "Track Your Order with SRIBEES Express",
+    "allCategories": "All Categories",
+    "freshProduce": "Fresh Produce",
+    "dairyEggs": "Dairy & Eggs",
+    "beverages": "Beverages",
+    "pantryStaples": "Pantry Staples",
+    "meatSeafood": "Meat & Seafood",
+    "snacks": "Snacks & Sweets",
+    "household": "Household Care"
+  },
+  "cartDrawer": {
+    "title": "Your Cart",
+    "emptyTitle": "Your cart is empty",
+    "emptySubtitle": "Add items from the store to get started",
+    "subtotal": "Subtotal",
+    "checkout": "Proceed to Checkout",
+    "viewCart": "View Full Cart",
+    "freeDeliveryNotice": "Fast islandwide delivery via SriBees Express"
+  },
+  "footer": {
+    "tagline": "Smart Grocery Hub & SriBees Express Delivery.",
+    "hotlineText": "Hotline / Support",
+    "deliveryHours": "SriBees Express Delivery Hours: 6:00 AM – 11:00 PM Daily",
+    "quickLinks": "Quick Links",
+    "departments": "Top Departments",
+    "customerCare": "Customer Care",
+    "copyright": "All rights reserved. SRIBEES Online (Pvt) Ltd."
+  },
+  "actions": {
+    "addToCart": "Add to Cart",
+    "added": "Added",
+    "buyNow": "Buy Now",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "apply": "Apply",
+    "close": "Close",
+    "viewAll": "View All",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock"
+  },
+  "userDropdown": {
+    "myAccount": "My Account",
+    "myAccountDesc": "Profile, saved addresses & wallet",
+    "myOrders": "My Orders",
+    "myOrdersDesc": "View order history & easy reorder",
+    "savedItems": "Saved Items",
+    "savedItemsDesc": "Wishlist & recently viewed items",
+    "referEarn": "Refer & Earn",
+    "referEarnDesc": "Invite friends & get discount offers",
+    "accountSettings": "Account Settings",
+    "accountSettingsDesc": "Security, language & notifications",
+    "exploreStore": "Explore Store",
+    "shopAll": "Shop All Products",
+    "shopAllDesc": "Explore fresh groceries & essentials",
+    "categories": "Categories",
+    "categoriesDesc": "Browse by departments & produce",
+    "promotions": "Promotions & Offers",
+    "promotionsDesc": "Special discounts & daily deals",
+    "hot": "Hot",
+    "signOut": "Sign Out Account",
+    "signingOut": "Signing Out..."
+  },
+  "mobileAppBanner": {
+    "title": "SRIBEES Online",
+    "subtitle": "Smart Grocery Delivery • Google Play",
+    "action": "INSTALL",
+    "close": "Dismiss banner"
+  }
+}
