@@ -28,7 +28,7 @@ export function AppDownloadCTA() {
           </h2>
 
           <p className="text-zinc-300 text-base sm:text-lg leading-relaxed max-w-xl">
-            Download our Android application. Real-time inventory synchronization, instant order tracking, and seamless delivery tracking right to your doorstep.
+            Download our native Android/iOS application. Real-time inventory synchronization, instant order tracking, and seamless delivery tracking right to your doorstep.
           </p>
 
           
@@ -39,6 +39,13 @@ export function AppDownloadCTA() {
               <div className="text-left">
                 <div className="text-[10px] uppercase text-zinc-400 font-semibold tracking-wider leading-none">GET IT ON</div>
                 <div className="text-sm font-extrabold text-white tracking-tight leading-tight mt-0.5">Google Play</div>
+              </div>
+            </a>
+            <a href={STORE_URLS.appStore} target="_blank" rel="noopener noreferrer" className="bg-zinc-900 hover:bg-black border border-white/20 text-white px-5 py-3 rounded-2xl flex items-center gap-3 transition-all hover:scale-105 shadow-xl group">
+              <Image src="/base/appstore.png" alt="" width={24} height={24} className="w-6 h-6 object-contain shrink-0 group-hover:scale-110 transition-transform duration-200" />
+              <div className="text-left">
+                <div className="text-[10px] uppercase text-zinc-400 font-semibold tracking-wider leading-none">Download on the</div>
+                <div className="text-sm font-extrabold text-white tracking-tight leading-tight mt-0.5">App Store</div>
               </div>
             </a>
             <ShopNowLink label="Shop on the Web" className="px-6 py-3.5 text-sm" />

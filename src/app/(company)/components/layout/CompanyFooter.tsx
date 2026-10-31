@@ -24,6 +24,14 @@ export function CompanyFooter() {
       <div className="flex flex-wrap gap-3">
 
         
+        <a href={STORE_URLS.appStore} target="_blank" rel="noopener noreferrer" className="bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/60 text-white px-4 py-2 rounded-xl flex items-center gap-3 transition-colors">
+          <Image src="/base/appstore.png" alt="" width={24} height={24} className="w-6 h-6 object-contain shrink-0" />
+          <div className="text-left">
+            <div className="text-[10px] uppercase text-zinc-400 font-medium">Download on the</div>
+            <div className="text-xs font-bold -mt-0.5">App Store</div>
+          </div>
+        </a>
+
         <a href={STORE_URLS.playStore} target="_blank" rel="noopener noreferrer" className="bg-zinc-900 hover:bg-zinc-800 border border-zinc-700/60 text-white px-4 py-2 rounded-xl flex items-center gap-3 transition-colors">
           <Image src="/base/playstore.png" alt="" width={24} height={24} className="w-6 h-6 object-contain shrink-0" />
           <div className="text-left">

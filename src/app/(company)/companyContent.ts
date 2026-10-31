@@ -3,6 +3,8 @@ import { PLAYSTORE_LINK, SOCIAL_LINKS } from "@/constants/links";
 
 export const STORE_URLS = {
   playStore: PLAYSTORE_LINK,
+  // Placeholder until the live App Store listing URL is supplied.
+  appStore: "https://apps.apple.com/app/sribees-online",
 };
 
 export const AFFILIATE_PORTAL_URL = "https://affiliate.sribees.online";

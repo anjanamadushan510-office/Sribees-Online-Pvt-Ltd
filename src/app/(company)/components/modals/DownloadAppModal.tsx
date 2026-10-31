@@ -68,6 +68,23 @@ export function DownloadAppModal() {
               </span>
             </a>
 
+            <a
+              href={STORE_URLS.appStore}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-zinc-900 hover:bg-black text-white px-4 py-3 rounded-xl flex items-center gap-3 shadow-md transition-colors"
+            >
+              <Image src="/base/appstore.png" alt="" width={24} height={24} className="w-6 h-6 object-contain" />
+              <span className="text-left">
+                <span className="block text-[9px] uppercase text-zinc-400 font-semibold tracking-wider leading-none">
+                  Download on the
+                </span>
+                <span className="block text-sm font-bold tracking-tight leading-tight mt-0.5">
+                  App Store
+                </span>
+              </span>
+            </a>
+
             <Link
               href={ROUTES.HOME}
               onClick={close}

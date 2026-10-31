@@ -41,7 +41,7 @@ const heroSlides = [
 
 const platformCards = [
   { tagline: "VIRTUAL GROCERY NETWORK", title: "SRIBEES Online", subtitle: "Virtual Grocery Network", Icon: ShoppingBag, href: ROUTES.HOME },
-  { tagline: "MOBILE FIRST", title: "SRIBEES App", subtitle: "Android Order App", Icon: Smartphone },
+  { tagline: "MOBILE FIRST", title: "SRIBEES App", subtitle: "Android & iOS Order App", Icon: Smartphone },
   { tagline: "ONLINE ACCESS", title: "SRIBEES Web", subtitle: "Online Portal & Catalog", Icon: Globe, href: ROUTES.PRODUCTS },
   { tagline: "FAST DELIVERY", title: "SRIBEES Express", subtitle: "Same-Day Order Delivery", Icon: Truck, href: ROUTES.HOW_IT_WORKS },
 ];
