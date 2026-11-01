@@ -84,7 +84,7 @@ function printBanner() {
 
   // 3. Build & System Metadata
   const nodeEnv = process.env.NODE_ENV || "production";
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://api.sribees.com";
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://api.sribeesonline.com";
   const timestamp = new Date().toISOString().replace("T", " ").substring(0, 19) + " UTC";
   const nodeVersion = process.version;
 

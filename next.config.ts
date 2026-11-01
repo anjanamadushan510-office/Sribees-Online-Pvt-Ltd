@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "api.sribees.com",
+        hostname: "api.sribeesonline.com",
       },
       // Local development image server support (only enabled in development)
       ...(isDev
@@ -70,8 +70,8 @@ const nextConfig: NextConfig = {
               "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com data:",
-              "img-src 'self' data: blob: https://images.unsplash.com https://devapionline.sribees.com https://api.sribees.com",
-              "connect-src 'self' https://devapionline.sribees.com https://api.sribees.com http://localhost:8000 http://localhost:3000",
+              "img-src 'self' data: blob: https://images.unsplash.com https://devapionline.sribees.com https://api.sribeesonline.com",
+              "connect-src 'self' https://devapionline.sribees.com https://api.sribeesonline.com http://localhost:8000 http://localhost:3000",
               "frame-ancestors 'none'",
               "base-uri 'self'",
               "form-action 'self'",
