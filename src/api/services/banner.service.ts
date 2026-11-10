@@ -3,27 +3,43 @@ import { BANNER_ENDPOINTS } from "../endpoints/banner.endpoint";
 import { Banner } from "@/interfaces/banner.interface";
 import { formatImageUrl } from "@/utils/formatImageUrl";
 
-export function mapApiBannerToBanner(raw: any, index: number = 0): Banner {
+/** The admin's own words, or nothing: a blank field stays blank. */
+const text = (value: unknown): string =>
+  typeof value === "string" ? value.trim() : "";
+
+/**
+ * A banner exactly as the admin made it.
+ *
+ * Banner artwork usually carries its own words, so the admin leaves title,
+ * subtitle and description empty. Filling those blanks with stock copy here
+ * ("SRIBEES Special Offers", "FRESH HYPERLOCAL MARKET", ...) laid placeholder
+ * text and a dark shade over the real artwork; the app never did. Blank now
+ * means blank, as in the app.
+ */
+export function mapApiBannerToBanner(
+  raw: Record<string, unknown>,
+  index: number = 0,
+): Banner {
   const imageUrl = formatImageUrl(
-    raw.imageUrl || raw.image_url || raw.image,
+    text(raw.imageUrl) || text(raw.image_url) || text(raw.image),
     "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1400"
   );
+  const bannerId = text(raw.bannerId) || text(raw.banner_id) || text(raw.id);
 
   return {
-    id: raw.bannerId || raw.banner_id || raw.id || `banner-${index}`,
-    bannerId: raw.bannerId || raw.banner_id || raw.id,
-    title: raw.title || "SRIBEES Special Offers",
-    subtitle: raw.subtitle || "FRESH HYPERLOCAL MARKET",
-    description:
-      raw.description ||
-      "Farm-fresh vegetables, organic produce & daily household staples delivered to your doorstep.",
+    id: bannerId || `banner-${index}`,
+    bannerId: bannerId || undefined,
+    title: text(raw.title),
+    subtitle: text(raw.subtitle),
+    description: text(raw.description),
     image: imageUrl,
     imageUrl: imageUrl,
-    badgeText: raw.badgeText || raw.badge_text || "100% Quality Guaranteed",
-    ctaText: raw.ctaText || raw.cta_text || "Shop Now",
-    linkType: raw.linkType || raw.link_type || null,
-    targetId: raw.targetId || raw.target_id || null,
-    categorySlug: raw.categorySlug || raw.category_slug || "vegetables",
+    badgeText: text(raw.badgeText ?? raw.badge_text),
+    ctaText: text(raw.ctaText ?? raw.cta_text),
+    linkType: text(raw.linkType) || text(raw.link_type) || null,
+    targetId: text(raw.targetId) || text(raw.target_id) || null,
+    // No invented category: a category banner without one opens Categories.
+    categorySlug: text(raw.categorySlug ?? raw.category_slug) || undefined,
   };
 }
 

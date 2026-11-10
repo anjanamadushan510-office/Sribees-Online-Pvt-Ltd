@@ -104,6 +104,10 @@ export const HeroBanner: React.FC = () => {
   if (!banners.length) return null;
 
   const slide = banners[currentSlide] || banners[0];
+  // Artwork-only banner (the admin left the words blank): show the picture
+  // clean, with no shade or button over it, as the app does. The whole
+  // banner stays clickable.
+  const hasText = Boolean(slide.title || slide.subtitle || slide.description);
 
   return (
     <section className="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-3 sm:pt-4 md:pt-6 pb-1">
@@ -116,21 +120,28 @@ export const HeroBanner: React.FC = () => {
         <div className="absolute inset-0 z-0">
           <img
             src={slide.image || slide.imageUrl}
-            alt={slide.title}
+            alt={slide.title || "SRIBEES Online"}
             className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/85 via-slate-900/50 to-transparent md:from-slate-600 md:via-slate-600/50" />
+          {hasText && (
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-900/85 via-slate-900/50 to-transparent md:from-slate-600 md:via-slate-600/50" />
+          )}
         </div>
 
-        {/* Content */}
+        {/* Content: only the words the admin wrote */}
+        {hasText && (
         <div className="relative z-10 p-4 md:p-12 max-w-2xl text-white space-y-2 md:space-y-4">
-          <div className="inline-flex items-center gap-2 px-2.5 py-0.5 md:px-3 md:py-1 rounded-full bg-[#D81B60] text-white text-[10px] md:text-xs font-black uppercase tracking-wider shadow-md">
-            <span>{slide.subtitle}</span>
-          </div>
+          {slide.subtitle && (
+            <div className="inline-flex items-center gap-2 px-2.5 py-0.5 md:px-3 md:py-1 rounded-full bg-[#D81B60] text-white text-[10px] md:text-xs font-black uppercase tracking-wider shadow-md">
+              <span>{slide.subtitle}</span>
+            </div>
+          )}
 
-          <h1 className="text-xl sm:text-3xl md:text-5xl font-black tracking-tight leading-tight text-white drop-shadow-sm">
-            {slide.title}
-          </h1>
+          {slide.title && (
+            <h1 className="text-xl sm:text-3xl md:text-5xl font-black tracking-tight leading-tight text-white drop-shadow-sm">
+              {slide.title}
+            </h1>
+          )}
 
           {slide.description && (
             <p className="hidden md:block text-sm md:text-base text-slate-300 font-medium line-clamp-2">
@@ -148,6 +159,7 @@ export const HeroBanner: React.FC = () => {
             </button>
           </div>
         </div>
+        )}
 
         {/* Navigation Controls */}
         {banners.length > 1 && (
