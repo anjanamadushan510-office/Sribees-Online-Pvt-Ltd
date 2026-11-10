@@ -3,6 +3,14 @@ import { STORAGE_KEYS } from "@/constants/storageKeys";
 import { useAuthStore } from "@/state/auth.store";
 import { API_BASE_URL } from "@/constants/config";
 import { isJwtExpired } from "@/utils/token";
+import { recordServerDate } from "@/utils/serverClock";
+
+/** The site's language (NEXT_LOCALE cookie), so server-worded text matches it. */
+function siteLanguage(): string | null {
+  if (typeof document === "undefined") return null;
+  const match = document.cookie.match(/(?:^|;\s*)NEXT_LOCALE=(en|si|ta)/);
+  return match ? match[1] : null;
+}
 
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,
@@ -44,6 +52,10 @@ apiClient.interceptors.request.use(
 
       if (config.headers) {
         config.headers["X-Device-Id"] = deviceId;
+        const lang = siteLanguage();
+        if (lang && !config.headers["Accept-Language"]) {
+          config.headers["Accept-Language"] = lang;
+        }
         const accessToken = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
         if (accessToken) {
           config.headers.Authorization = `Bearer ${accessToken}`;
@@ -57,8 +69,13 @@ apiClient.interceptors.request.use(
 
 // Response Interceptor: Auto Token Refresh on 401 & Auto Branch Context Resolution on 400
 apiClient.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    recordServerDate(response.headers?.["date"]);
+    return response;
+  },
   async (error: AxiosError) => {
+    // An error reply carries the server's Date too.
+    recordServerDate(error.response?.headers?.["date"]);
     const originalRequest = error.config as InternalAxiosRequestConfig & {
       _retry?: boolean;
     };

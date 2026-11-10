@@ -22,6 +22,41 @@ export interface CouponCard {
     name: string;
     color: string;
   } | null;
+  /** How the end is shown (server-decided); null when ended or open-ended. */
+  expiry?: CouponExpiry | null;
+  expiring_soon?: boolean;
+  is_new?: boolean;
+  /** "NEW" in the site's language, or null. */
+  badge?: string | null;
+}
+
+/**
+ * `timer`: count `ends_at` down against serverNow() with `text` as prefix.
+ * `days` / `date` (or anything newer): `text` is the whole line.
+ */
+export interface CouponExpiry {
+  ends_at: string;
+  mode: "timer" | "days" | "date" | string;
+  text: string;
+}
+
+/** A chip above the list; `key` is a card flag (`all` = every card). */
+export interface CouponFilter {
+  key: "all" | "expiring_soon" | "is_new" | string;
+  title: string;
+}
+
+export function couponMatches(card: CouponCard, key: string): boolean {
+  if (key === "expiring_soon") return Boolean(card.expiring_soon);
+  if (key === "is_new") return Boolean(card.is_new);
+  return true;
+}
+
+export interface CouponSpotlight {
+  show: boolean;
+  title?: string;
+  button?: string;
+  coupons: CouponCard[];
 }
 
 export interface CouponSection {
@@ -47,6 +82,8 @@ export interface EvaluateCouponsPayload {
   }>;
   applied_code?: string;
   include_offers?: boolean;
+  /** This client draws `expiry`, so the "Valid till" term is left out. */
+  expiry_line?: boolean;
 }
 
 export interface EvaluateCouponsResponse {
@@ -57,6 +94,7 @@ export interface EvaluateCouponsResponse {
     sections: CouponSection[];
     coupons: CouponCard[];
     applied?: AppliedCouponDetail | null;
+    filters?: CouponFilter[];
   };
 }
 

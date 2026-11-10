@@ -1,28 +1,41 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Tag, Sparkles, AlertCircle } from "lucide-react";
-import { useCoupons } from "@/api/queries/usePromotions";
-import { CouponCard } from "./CouponCard";
+import { useEvaluateCoupons, useCollectCoupon } from "@/api/queries/useCoupons";
+import { couponMatches } from "@/interfaces/coupon.interface";
+import { OfferCouponCard } from "./OfferCouponCard";
 import { Skeleton } from "@/components/base/Skeleton";
 import { Header } from "@/components/Header";
 import { useTranslations } from "next-intl";
+import { useAuthStore } from "@/state/auth.store";
 
 interface CouponsSectionProps {
   id?: string;
 }
 
+/**
+ * Offers & coupons, decided and worded by the server (`/coupons/evaluate`,
+ * browsing): the same cards, chips, countdowns and badges as the app.
+ */
 export const CouponsSection: React.FC<CouponsSectionProps> = ({
   id = "coupons-section",
 }) => {
   const t = useTranslations("promotions");
+  const { isAuthenticated } = useAuthStore();
+  const [filter, setFilter] = useState("all");
+  const collect = useCollectCoupon();
 
-  const {
-    data: coupons = [],
-    isLoading,
-    isError,
-    refetch,
-  } = useCoupons();
+  const { data, isLoading, isError, refetch } = useEvaluateCoupons({
+    include_offers: true,
+    expiry_line: true,
+  });
+
+  const cards = data?.coupons ?? [];
+  const filters = data?.filters ?? [];
+  // A chip the server stopped sending falls back to everything.
+  const active = filters.some((f) => f.key === filter) ? filter : "all";
+  const shown = cards.filter((c) => couponMatches(c, active));
 
   return (
     <section id={id} className="mb-14 scroll-mt-24">
@@ -40,21 +53,35 @@ export const CouponsSection: React.FC<CouponsSectionProps> = ({
         description={t("coupons.desc")}
       />
 
+      {filters.length > 1 && (
+        <div className="flex gap-2 overflow-x-auto pb-1 mb-5 -mx-1 px-1">
+          {filters.map((f) => (
+            <button
+              key={f.key}
+              type="button"
+              onClick={() => setFilter(f.key)}
+              className={`shrink-0 px-4 py-1.5 rounded-full border text-xs font-bold cursor-pointer transition-colors ${
+                f.key === active
+                  ? "bg-slate-900 border-slate-900 text-white"
+                  : "bg-white border-slate-200 text-slate-700 hover:border-slate-400"
+              }`}
+            >
+              {f.title}
+            </button>
+          ))}
+        </div>
+      )}
+
       {/* Content Grid */}
       {isLoading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div
-              key={i}
-              className="bg-white p-6 rounded-3xl border border-slate-200 space-y-4"
-            >
-              <Skeleton className="w-24 h-6 rounded-full" />
-              <Skeleton className="w-3/4 h-6 rounded-md" />
-              <Skeleton className="w-full h-4 rounded-md" />
-              <Skeleton className="w-full h-14 rounded-2xl" />
-              <div className="flex justify-between pt-2">
-                <Skeleton className="w-24 h-4 rounded-md" />
-                <Skeleton className="w-12 h-4 rounded-md" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="bg-white p-5 rounded-2xl border border-slate-200 flex gap-4">
+              <Skeleton className="w-24 h-16 rounded-xl" />
+              <div className="flex-1 space-y-3">
+                <Skeleton className="w-3/4 h-5 rounded-md" />
+                <Skeleton className="w-full h-4 rounded-md" />
+                <Skeleton className="w-1/2 h-4 rounded-md" />
               </div>
             </div>
           ))}
@@ -64,7 +91,7 @@ export const CouponsSection: React.FC<CouponsSectionProps> = ({
           <AlertCircle className="w-8 h-8 mx-auto" />
           <h3 className="text-base font-extrabold">Failed to load coupons</h3>
           <p className="text-xs text-slate-600">
-            We couldn't connect to fetch current coupons. Please try again.
+            We couldn&apos;t connect to fetch current coupons. Please try again.
           </p>
           <button
             onClick={() => refetch()}
@@ -73,22 +100,21 @@ export const CouponsSection: React.FC<CouponsSectionProps> = ({
             Retry
           </button>
         </div>
-      ) : coupons.length === 0 ? (
+      ) : shown.length === 0 ? (
         <div className="p-10 text-center bg-white rounded-3xl border border-slate-200 space-y-3">
           <Sparkles className="w-8 h-8 text-slate-400 mx-auto" />
-          <h3 className="text-base font-black text-slate-800">
-            No active coupons
-          </h3>
-          <p className="text-xs text-slate-500">
-            Check back soon for available promo codes.
-          </p>
+          <h3 className="text-base font-black text-slate-800">{t("coupons.empty")}</h3>
+          <p className="text-xs text-slate-500">{t("coupons.emptyDesc")}</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {coupons.map((coupon, index) => (
-            <CouponCard
-              key={coupon.id || coupon.coupon_id || coupon.code || `coupon-${index}`}
-              coupon={coupon}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {shown.map((card) => (
+            <OfferCouponCard
+              key={card.coupon_id || card.code}
+              card={card}
+              onCollect={isAuthenticated ? (code) => collect.mutate(code) : undefined}
+              collecting={collect.isPending && collect.variables === card.code}
+              onEnded={() => refetch()}
             />
           ))}
         </div>

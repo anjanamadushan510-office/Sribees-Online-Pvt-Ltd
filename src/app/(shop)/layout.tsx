@@ -11,6 +11,7 @@ import { Footer } from "@/components/Footer";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { QuickViewModal } from "@/components/product/QuickViewModal";
 import { LoginModal } from "@/app/(shop)/home/components/LoginModal";
+import { CouponSpotlightModal } from "@/components/coupons/CouponSpotlightModal";
 
 export const metadata: Metadata = {
   title: "SRIBEES Online | Smart Grocery Hub",
@@ -39,6 +40,7 @@ export default async function ShopLayout({
           <CartDrawer />
           <QuickViewModal />
           <LoginModal />
+          <CouponSpotlightModal />
         </div>
       </Providers>
     </AppIntlProvider>

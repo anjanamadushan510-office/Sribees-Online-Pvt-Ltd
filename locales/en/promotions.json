@@ -12,7 +12,11 @@
     "desc": "Apply these promo codes during checkout to unlock instant discounts.",
     "copyCode": "Copy Code",
     "copied": "Copied!",
-    "minOrder": "Min. order"
+    "minOrder": "Min. order",
+    "collect": "Collect",
+    "copy": "Copy",
+    "empty": "No active coupons",
+    "emptyDesc": "Check back soon for available promo codes."
   },
   "deals": {
     "badge": "FLASH DISCOUNTS",

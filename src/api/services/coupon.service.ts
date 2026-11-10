@@ -5,6 +5,7 @@ import {
   EvaluateCouponsResponse,
   CollectCouponResponse,
   CouponCard,
+  CouponSpotlight,
 } from "@/interfaces/coupon.interface";
 
 export const couponService = {
@@ -24,5 +25,26 @@ export const couponService = {
       { code }
     );
     return response.data.data.coupon;
+  },
+
+  /** The app-open popup; the server decides `show` (once a day). */
+  getSpotlight: async (): Promise<CouponSpotlight> => {
+    const response = await apiClient.get<{ data: CouponSpotlight }>(
+      COUPON_ENDPOINTS.SPOTLIGHT
+    );
+    return response.data.data;
+  },
+
+  markSpotlightSeen: async (couponIds: string[]): Promise<void> => {
+    await apiClient.post(COUPON_ENDPOINTS.SPOTLIGHT_SEEN, { coupon_ids: couponIds });
+  },
+
+  /** Saves every code to My Coupons; returns the server's message. */
+  collectMany: async (codes: string[]): Promise<string | undefined> => {
+    const response = await apiClient.post<{ message?: string }>(
+      COUPON_ENDPOINTS.COLLECT_MANY,
+      { codes }
+    );
+    return response.data.message;
   },
 };
