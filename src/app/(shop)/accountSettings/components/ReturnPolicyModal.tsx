@@ -1,18 +1,14 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { X, PackageCheck, UserCheck, Check } from "lucide-react";
+import { X, PackageCheck, Check } from "lucide-react";
+import { ReturnPolicySections } from "@/components/ReturnPolicy/ReturnPolicySections";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import { useTranslations } from "next-intl";
 
 interface ReturnPolicyModalProps {
   isOpen: boolean;
   onClose: () => void;
-}
-
-interface PolicySection {
-  title: string;
-  points: string[];
 }
 
 export const ReturnPolicyModal: React.FC<ReturnPolicyModalProps> = ({
@@ -35,11 +31,6 @@ export const ReturnPolicyModal: React.FC<ReturnPolicyModalProps> = ({
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
-
-  // Every section and point comes from locales/<lang>/account.json, so the
-  // three languages always carry the same policy.
-  const raw = t.raw("returnPolicy.sections");
-  const sections: PolicySection[] = Array.isArray(raw) ? raw : [];
 
   return (
     <div
@@ -80,29 +71,8 @@ export const ReturnPolicyModal: React.FC<ReturnPolicyModalProps> = ({
           </button>
         </div>
 
-        <div className="p-6 overflow-y-auto space-y-5 text-xs sm:text-sm text-slate-600 leading-relaxed">
-          <div className="bg-rose-50/70 border border-rose-200/80 rounded-2xl p-4 flex items-start gap-3">
-            <UserCheck className="w-5 h-5 text-[#D81B60] shrink-0 mt-0.5" />
-            <p className="text-xs text-slate-700 font-medium">
-              {t("returnPolicy.banner")}
-            </p>
-          </div>
-
-          {sections.map((section, i) => (
-            <div key={i}>
-              <h3 className="text-sm font-bold text-slate-900 mb-1.5 flex items-center gap-2">
-                <span className="w-5 h-5 rounded-full bg-rose-100 text-[#D81B60] text-[11px] font-bold flex items-center justify-center shrink-0">
-                  {i + 1}
-                </span>
-                {section.title}
-              </h3>
-              <ul className="list-disc pl-12 space-y-1">
-                {(section.points ?? []).map((point, j) => (
-                  <li key={j}>{point}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+        <div className="p-6 overflow-y-auto">
+          <ReturnPolicySections />
         </div>
 
         <div className="p-5 border-t border-slate-100 bg-slate-50/70 flex items-center justify-end">

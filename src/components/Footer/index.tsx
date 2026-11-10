@@ -236,6 +236,14 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link
+                  href={ROUTES.RETURN_POLICY}
+                  className="hover:text-[#D81B60] transition-colors"
+                >
+                  Return &amp; Refund Policy
+                </Link>
+              </li>
+              <li>
                 <a
                   href={PLAYSTORE_LINK}
                   target="_blank"

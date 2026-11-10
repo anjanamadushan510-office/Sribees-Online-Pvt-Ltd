@@ -71,6 +71,8 @@ export function CompanyFooter() {
         <span>|</span>
         <Link href={ROUTES.PRIVACY_POLICY} className="hover:text-zinc-300 transition-colors">Privacy Policy</Link>
         <span>|</span>
+        <Link href={ROUTES.RETURN_POLICY} className="hover:text-zinc-300 transition-colors">Return &amp; Refund Policy</Link>
+        <span>|</span>
         <span>Making local products easier to discover, access, and shop online.</span>
       </div>
     </div>
