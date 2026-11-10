@@ -18,6 +18,7 @@ export const ROUTES = {
   REFERRAL: '/referral',
   PRIVACY_POLICY: '/privacyPolicy',
   RETURN_POLICY: '/returnPolicy',
+  TERMS: '/terms',
 };
 
 

@@ -244,6 +244,14 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link
+                  href={ROUTES.TERMS}
+                  className="hover:text-[#D81B60] transition-colors"
+                >
+                  Terms &amp; Conditions
+                </Link>
+              </li>
+              <li>
                 <a
                   href={PLAYSTORE_LINK}
                   target="_blank"

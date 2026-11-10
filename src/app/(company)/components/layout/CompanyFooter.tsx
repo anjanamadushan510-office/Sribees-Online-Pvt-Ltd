@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ROUTES } from "@/constants/routes";
 import { STORE_URLS, footerSections } from "../../companyContent";
-import { ModalTrigger } from "../modals/ModalTrigger";
 import { Container } from "../base";
 
 export function CompanyFooter() {
@@ -67,7 +66,7 @@ export function CompanyFooter() {
       </div>
 
       <div className="flex flex-wrap items-center gap-6">
-        <ModalTrigger modal="terms" className="hover:text-zinc-300 transition-colors cursor-pointer">Terms and Conditions</ModalTrigger>
+        <Link href={ROUTES.TERMS} className="hover:text-zinc-300 transition-colors">Terms and Conditions</Link>
         <span>|</span>
         <Link href={ROUTES.PRIVACY_POLICY} className="hover:text-zinc-300 transition-colors">Privacy Policy</Link>
         <span>|</span>

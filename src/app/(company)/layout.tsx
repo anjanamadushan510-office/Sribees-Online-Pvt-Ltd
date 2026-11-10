@@ -3,7 +3,6 @@ import { CompanyHeader } from "./components/layout/CompanyHeader";
 import { CompanyFooter } from "./components/layout/CompanyFooter";
 import { StickyShopBar } from "./components/layout/StickyShopBar";
 import { DownloadAppModal } from "./components/modals/DownloadAppModal";
-import { TermsModal } from "./components/modals/TermsModal";
 
 export default function CompanyLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -15,7 +14,6 @@ export default function CompanyLayout({ children }: { children: React.ReactNode 
       <CompanyFooter />
       <StickyShopBar />
       <DownloadAppModal />
-      <TermsModal />
     </div>
   );
 }
