@@ -8,6 +8,7 @@ import { useBanners } from "@/api/queries/useBanners";
 import { bannerService } from "@/api/services/banner.service";
 import { Skeleton } from "@/components/base/Skeleton";
 import { Banner } from "@/interfaces/banner.interface";
+import { heroBannerLayout } from "@/utils/heroBannerLayout";
 
 export const getBannerDestination = (banner: Banner): string => {
   const linkType = (banner.linkType || "").toLowerCase().trim();
@@ -105,9 +106,19 @@ export const HeroBanner: React.FC = () => {
 
   const slide = banners[currentSlide] || banners[0];
   // Artwork-only banner (the admin left the words blank): show the picture
-  // clean, with no shade or button over it, as the app does. The whole
-  // banner stays clickable.
-  const hasText = Boolean(slide.title || slide.subtitle || slide.description);
+  // clean, with no shade. It still gets a Shop Now button when the admin
+  // chose where it opens. The whole banner stays clickable.
+  const layout = heroBannerLayout(slide);
+  const hasText = layout.showText;
+  const shopNowButton = (
+    <button
+      type="button"
+      onClick={handleBannerNavigate}
+      className="px-4 py-1.5 md:px-6 md:py-3 bg-[#D81B60] hover:bg-[#C2185B] text-white text-xs md:text-sm font-extrabold tracking-wide rounded-full shadow-lg shadow-rose-900/50 hover:shadow-rose-700/50 transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+    >
+      {slide.ctaText || t("shopNow")} &rarr;
+    </button>
+  );
 
   return (
     <section className="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-3 sm:pt-4 md:pt-6 pb-1">
@@ -123,7 +134,7 @@ export const HeroBanner: React.FC = () => {
             alt={slide.title || "SRIBEES Online"}
             className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
           />
-          {hasText && (
+          {layout.showShade && (
             <div className="absolute inset-0 bg-gradient-to-r from-slate-900/85 via-slate-900/50 to-transparent md:from-slate-600 md:via-slate-600/50" />
           )}
         </div>
@@ -150,15 +161,17 @@ export const HeroBanner: React.FC = () => {
           )}
 
           <div className="pt-0.5 md:pt-2 flex flex-wrap items-center gap-4">
-            <button
-              type="button"
-              onClick={handleBannerNavigate}
-              className="px-4 py-1.5 md:px-6 md:py-3 bg-[#D81B60] hover:bg-[#C2185B] text-white text-xs md:text-sm font-extrabold tracking-wide rounded-full shadow-lg shadow-rose-900/50 hover:shadow-rose-700/50 transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
-            >
-              {slide.ctaText || t("shopNow")} &rarr;
-            </button>
+            {shopNowButton}
           </div>
         </div>
+        )}
+
+        {/* Artwork-only banner that leads somewhere: the button sits in the
+            bottom-left corner so it does not cover the artwork's own words. */}
+        {!hasText && layout.showButton && (
+          <div className="absolute left-4 bottom-3 md:left-8 md:bottom-6 z-10">
+            {shopNowButton}
+          </div>
         )}
 
         {/* Navigation Controls */}
