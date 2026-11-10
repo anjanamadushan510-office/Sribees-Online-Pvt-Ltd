@@ -231,5 +231,83 @@
     "refundAddedTag": "Refund Added",
     "credited": "Credited",
     "debited": "Debited"
+  },
+  "returnPolicy": {
+    "title": "Return & Refund Policy",
+    "cardDesc": "When and how you can return an order, and how refunds work.",
+    "highlightTitle": "12 hours to report a problem",
+    "highlightText": "If an item arrives damaged, broken, spoiled, wrong or not as described, request a return with photos within 12 hours of delivery.",
+    "readLink": "Read the return policy",
+    "modalSubtitle": "For orders placed on the Sribees Online app and website.",
+    "banner": "Every return request is checked by the branch manager of the branch that delivered your order. The final decision to approve a return belongs to the branch manager.",
+    "close": "Close",
+    "sections": [
+      {
+        "title": "When you can return",
+        "points": [
+          "You can request a return within 12 hours of your order being delivered. Your order shows how much time is left.",
+          "After 12 hours the return option closes. If you still need help, contact us through Help & Support or at support@sribeesonline.com.",
+          "Only one return request can be made for each order, so select every item you want to return at the same time."
+        ]
+      },
+      {
+        "title": "What you can return",
+        "points": [
+          "Items that arrived damaged, broken, leaking or faulty.",
+          "Items that arrived spoiled or past their expiry date.",
+          "A wrong item, or an item that is not as described.",
+          "Items whose quality is not acceptable.",
+          "You can return the whole parcel, or only some items and quantities."
+        ]
+      },
+      {
+        "title": "What you cannot return",
+        "points": [
+          "Products marked \"Non-returnable\" on the product page and in your order. Other items in the same order can still be returned.",
+          "Items with nothing wrong that you simply no longer want may not be approved."
+        ]
+      },
+      {
+        "title": "How to request a return",
+        "points": [
+          "Open your order history, open the delivered order and tap \"Return Items\".",
+          "Choose the items and quantities, then choose a reason. If you choose \"Other\", tell us briefly what happened.",
+          "Add 1 to 4 clear photos that show the problem (JPG, PNG or WebP, up to 5 MB each). Photos are required, because the branch decides by looking at them.",
+          "Submit the request. Your order will show \"Return Requested\" and you will be notified of the decision."
+        ]
+      },
+      {
+        "title": "Who decides",
+        "points": [
+          "The branch manager reviews your photos and details. Approving or rejecting a return is the branch manager's final decision.",
+          "When approving, the branch manager also decides whether the item needs to be collected from you.",
+          "If your request is rejected, the reason is shown on your order."
+        ]
+      },
+      {
+        "title": "If the item is collected",
+        "points": [
+          "A rider comes to your delivery address to collect the item. Please keep it ready, with its packaging.",
+          "Your refund is credited to your Sribees Wallet once the item reaches the branch."
+        ]
+      },
+      {
+        "title": "If the item is not collected",
+        "points": [
+          "For items that are spoiled or broken and not worth sending back, the branch may refund you without collecting them.",
+          "In that case the refund is credited to your Sribees Wallet as soon as the return is approved."
+        ]
+      },
+      {
+        "title": "Your refund",
+        "points": [
+          "You get back what you paid for the returned items. If you used a coupon, the part of the discount that applied to those items is deducted.",
+          "Delivery charges are not refunded.",
+          "If a return pickup charge applies, it is shown on the return screen before you submit. It is charged only when a rider collects the item, and never more than your refund.",
+          "Cash Back earned on the returned items is removed from your rewards.",
+          "Refunds are added to your Sribees Wallet, and you can use them on your next order."
+        ]
+      }
+    ]
   }
 }

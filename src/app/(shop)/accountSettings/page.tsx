@@ -9,6 +9,7 @@ import { NotificationsCard } from "./components/NotificationsCard";
 import { PrivacyProtectionCard } from "./components/PrivacyProtectionCard";
 import { ActiveSessionsCard } from "./components/ActiveSessionsCard";
 import { DangerZoneCard } from "./components/DangerZoneCard";
+import { ReturnPolicyCard } from "./components/ReturnPolicyCard";
 import { SecuritySupportBanner } from "./components/SecuritySupportBanner";
 import { UnauntheticatedWarningBanner } from "@/components/UnauntheticatedWarningBanner";
 import { useGetWalletBalance } from "@/api/queries/useWallet";
@@ -59,6 +60,11 @@ export default function AccountSettingsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <PrivacyProtectionCard />
         <ActiveSessionsCard />
+      </div>
+
+      {/* Return & Refund Policy */}
+      <div className="mb-6">
+        <ReturnPolicyCard />
       </div>
 
       {/* Danger Zone: Account Deletion */}
