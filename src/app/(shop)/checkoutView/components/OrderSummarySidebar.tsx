@@ -17,7 +17,7 @@ import { formatLKR } from "@/utils/formatCurrency";
 import { AddressOption } from "./AddressChangeModal";
 import { useAuthStore } from "@/state/auth.store";
 import { useUIStore } from "@/state/ui.store";
-import { isDummyPhone } from "@/utils/formatMobileNumber";
+import { formatMobileInput, isDummyPhone } from "@/utils/formatMobileNumber";
 import { AvailableCouponsModal } from "./AvailableCouponsModal";
 
 interface OrderSummarySidebarProps {
@@ -51,6 +51,10 @@ interface OrderSummarySidebarProps {
 
   // Place order
   onPlaceOrder: () => void;
+  // The second number the rider can call. Required on every order.
+  alternatePhone: string;
+  onAlternatePhoneChange: (val: string) => void;
+  alternatePhoneError?: string | null;
 }
 
 export const OrderSummarySidebar: React.FC<OrderSummarySidebarProps> = ({
@@ -76,6 +80,9 @@ export const OrderSummarySidebar: React.FC<OrderSummarySidebarProps> = ({
   needsSecondaryPayment,
   remainingAfterWallet,
   onPlaceOrder,
+  alternatePhone,
+  onAlternatePhoneChange,
+  alternatePhoneError,
 }) => {
   const t = useTranslations("checkout");
   const [couponInput, setCouponInput] = useState(couponCode);
@@ -172,14 +179,7 @@ export const OrderSummarySidebar: React.FC<OrderSummarySidebarProps> = ({
       ? selectedAddress.contact
       : user?.phone || selectedAddress.contact || "";
 
-  const hasAlt =
-    user?.alternatePhone &&
-    !isDummyPhone(user.alternatePhone) &&
-    user.alternatePhone !== primaryPhone;
-
-  const displayContact = hasAlt
-    ? `${primaryPhone} / ${user.alternatePhone}`
-    : primaryPhone;
+  const displayContact = primaryPhone;
 
   return (
     <div className="space-y-4">
@@ -344,6 +344,39 @@ export const OrderSummarySidebar: React.FC<OrderSummarySidebarProps> = ({
               {displayContact ? `${displayContact} • ` : ""}
               <span className="font-bold">{selectedAddress.tag}</span>
             </div>
+          </div>
+
+          <div className="space-y-1">
+            <label
+              htmlFor="checkout-alt-phone"
+              className="text-[11px] font-black tracking-wider text-slate-500 uppercase block"
+            >
+              {t("delivery.altPhoneLabel")} *
+            </label>
+            <input
+              id="checkout-alt-phone"
+              type="tel"
+              inputMode="numeric"
+              autoComplete="tel"
+              value={alternatePhone}
+              onChange={(e) =>
+                onAlternatePhoneChange(formatMobileInput(e.target.value))
+              }
+              placeholder="07X XXX XXXX"
+              aria-invalid={Boolean(alternatePhoneError)}
+              className={`w-full px-4 py-2.5 bg-slate-100/70 border rounded-xl text-sm font-bold text-slate-900 focus:outline-none focus:bg-white transition-all ${
+                alternatePhoneError
+                  ? "border-rose-400 focus:border-rose-500"
+                  : "border-slate-200 focus:border-[#D81B60]"
+              }`}
+            />
+            <p
+              className={`text-[10px] font-medium ${
+                alternatePhoneError ? "text-rose-600" : "text-slate-400"
+              }`}
+            >
+              {alternatePhoneError || t("delivery.altPhoneHint")}
+            </p>
           </div>
         </div>
 

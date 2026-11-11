@@ -15,7 +15,13 @@
     "changeAddress": "Change",
     "addAddress": "Add New Address",
     "slotTitle": "Delivery Window",
-    "instantSlot": "SriBees Express Dispatch"
+    "instantSlot": "SriBees Express Dispatch",
+    "altPhoneLabel": "Second mobile number",
+    "altPhoneHint": "Another number the rider can call if the first one does not answer.",
+    "altPhoneRequired": "Please enter a second mobile number.",
+    "altPhoneInvalid": "Enter a valid Sri Lankan mobile number (e.g. 0771234567).",
+    "altPhoneSame": "The second number must be different from the first.",
+    "altPhoneTitle": "Second Mobile Number Needed"
   },
   "payment": {
     "title": "Payment Method",

@@ -29,7 +29,12 @@ import { useGetPaymentMethods } from "@/api/queries/usePaymentMethods";
 import { useQuoteOrder, useCreateOrder } from "@/api/queries/useOrders";
 import { useGetWalletBalance } from "@/api/queries/useWallet";
 import { useToastStore } from "@/state/toast.store";
-import { isDummyPhone } from "@/utils/formatMobileNumber";
+import {
+  getCleanMobileNumber,
+  isDummyPhone,
+  isValidMobileNumber,
+} from "@/utils/formatMobileNumber";
+import { useTranslations } from "next-intl";
 
 export default function CheckoutViewPage() {
   const router = useRouter();
@@ -84,10 +89,22 @@ export default function CheckoutViewPage() {
     id: "",
     name: customerDisplayName || "Customer",
     address: "Select a delivery address",
-    contact: user?.phone || "0771234567",
+    contact: user?.phone || "",
     tag: "Home",
   });
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
+
+  // Second number for the rider. The server requires two real, different
+  // numbers on every order; it is never made up here. Starts from the one
+  // saved on the account, if any.
+  const tCheckout = useTranslations("checkout");
+  const savedAlternate =
+    user?.alternatePhone && !isDummyPhone(user.alternatePhone)
+      ? user.alternatePhone.replace(/^\+94/, "0")
+      : "";
+  const [alternatePhoneInput, setAlternatePhoneInput] = useState<string | null>(null);
+  const alternatePhone = alternatePhoneInput ?? savedAlternate;
+  const [alternatePhoneError, setAlternatePhoneError] = useState<string | null>(null);
 
   // Sync default address from API
   useEffect(() => {
@@ -110,7 +127,7 @@ export default function CheckoutViewPage() {
       const resolvedPhone =
         !isDummyPhone(addrPhone) && addrPhone
           ? addrPhone
-          : user?.phone || "0771234567";
+          : user?.phone || "";
 
       setSelectedAddress({
         id: defaultAddr.address_id,
@@ -571,15 +588,25 @@ export default function CheckoutViewPage() {
       return;
     }
 
-    // WEB_STOREFRONT_API requires contact_phone and alternate_phone to differ
-    const altPhone =
-      user?.alternatePhone &&
-      !isDummyPhone(user.alternatePhone) &&
-      user.alternatePhone !== resolvedContact
-        ? user.alternatePhone
-        : resolvedContact.startsWith("077") || resolvedContact.startsWith("+9477")
-          ? "0719876543"
-          : "0771234567";
+    // The server requires a second, different number. Ask for a real one.
+    const altPhone = alternatePhone.trim();
+    const altProblem = !altPhone
+      ? tCheckout("delivery.altPhoneRequired")
+      : !isValidMobileNumber(altPhone) || isDummyPhone(altPhone)
+        ? tCheckout("delivery.altPhoneInvalid")
+        : getCleanMobileNumber(altPhone) === getCleanMobileNumber(resolvedContact.replace(/^\+94/, "0"))
+          ? tCheckout("delivery.altPhoneSame")
+          : null;
+    setAlternatePhoneError(altProblem);
+    if (altProblem) {
+      addToast({
+        title: tCheckout("delivery.altPhoneTitle"),
+        message: altProblem,
+        type: "error",
+      });
+      document.getElementById("checkout-alt-phone")?.focus();
+      return;
+    }
 
     // For split payment: when wallet is partial, use secondary payment method code;
     // when wallet covers 100%, use WALLET; otherwise use selected method directly.
@@ -673,6 +700,12 @@ export default function CheckoutViewPage() {
             needsSecondaryPayment={needsSecondaryPayment}
             remainingAfterWallet={remainingAfterWallet}
             onPlaceOrder={handlePlaceOrder}
+            alternatePhone={alternatePhone}
+            onAlternatePhoneChange={(val) => {
+              setAlternatePhoneInput(val);
+              setAlternatePhoneError(null);
+            }}
+            alternatePhoneError={alternatePhoneError}
           />
         </div>
       </div>

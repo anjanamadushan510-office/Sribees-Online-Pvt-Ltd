@@ -15,7 +15,13 @@
     "changeAddress": "மாற்றுக",
     "addAddress": "புதிய முகவரி சேர்க்க",
     "slotTitle": "விநியோக நேரம்",
-    "instantSlot": "SriBees Express விரைவு விநியோகம்"
+    "instantSlot": "SriBees Express விரைவு விநியோகம்",
+    "altPhoneLabel": "இரண்டாவது மொபைல் எண்",
+    "altPhoneHint": "முதல் எண் பதிலளிக்காவிட்டால் ரைடர் அழைக்கக்கூடிய மற்றொரு எண்.",
+    "altPhoneRequired": "இரண்டாவது மொபைல் எண்ணை உள்ளிடவும்.",
+    "altPhoneInvalid": "சரியான இலங்கை மொபைல் எண்ணை உள்ளிடவும் (எ.கா. 0771234567).",
+    "altPhoneSame": "இரண்டாவது எண் முதல் எண்ணிலிருந்து வேறுபட வேண்டும்.",
+    "altPhoneTitle": "இரண்டாவது மொபைல் எண் தேவை"
   },
   "payment": {
     "title": "கட்டண முறை",
