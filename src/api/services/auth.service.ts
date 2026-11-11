@@ -5,6 +5,7 @@ import {
   RequestOtpResponse,
   VerifyOtpRequest,
   VerifyOtpResponse,
+  SocialLoginRequest,
   UpdateProfileRequest,
   UpdateProfileResponse,
   RefreshTokenRequest,
@@ -41,6 +42,31 @@ const normalizeUserResponse = (raw: any): User => {
   };
 };
 
+// A session response (OTP or Google): the user plus the token pair, under
+// whichever key spelling the server used.
+const toSession = (resData: any): VerifyOtpResponse => {
+  const user = normalizeUserResponse(resData.user || resData);
+  const accessToken =
+    resData.tokens?.accessToken ||
+    resData.tokens?.access_token ||
+    resData.accessToken ||
+    resData.access_token ||
+    resData.token ||
+    "";
+  const refreshToken =
+    resData.tokens?.refreshToken ||
+    resData.tokens?.refresh_token ||
+    resData.refreshToken ||
+    resData.refresh_token ||
+    "";
+  return {
+    success: resData.success ?? true,
+    message: resData.message || "Logged in successfully",
+    user,
+    tokens: { accessToken, refreshToken },
+  };
+};
+
 export const authService = {
   requestOtp: async (data: RequestOtpRequest): Promise<RequestOtpResponse> => {
     const response = await apiClient.post<any>(
@@ -61,35 +87,36 @@ export const authService = {
       data,
     );
     const resData = response.data?.data || response.data;
-    const user = normalizeUserResponse(resData.user || resData);
-    if (!user.phone && data.phone) {
-      user.phone = data.phone;
+    const session = toSession(resData);
+    if (!session.user.phone && data.phone) {
+      session.user.phone = data.phone;
     }
+    if (!resData.message) session.message = "OTP Verified Successfully";
+    return session;
+  },
 
-    const accessToken =
-      resData.tokens?.accessToken ||
-      resData.tokens?.access_token ||
-      resData.accessToken ||
-      resData.access_token ||
-      resData.token ||
-      "";
+  /** Exchanges a Google ID token for a session; the server verifies it. */
+  socialLogin: async (data: SocialLoginRequest): Promise<VerifyOtpResponse> => {
+    const response = await apiClient.post<any>(AUTH_ENDPOINTS.SOCIAL_LOGIN, {
+      provider: data.provider,
+      id_token: data.idToken,
+      nonce: data.nonce,
+    });
+    return toSession(response.data?.data || response.data);
+  },
 
-    const refreshToken =
-      resData.tokens?.refreshToken ||
-      resData.tokens?.refresh_token ||
-      resData.refreshToken ||
-      resData.refresh_token ||
-      "";
-
-    return {
-      success: resData.success ?? true,
-      message: resData.message || "OTP Verified Successfully",
-      user,
-      tokens: {
-        accessToken,
-        refreshToken,
-      },
-    };
+  /**
+   * The Google Web client ID from the server's public app-config, or null
+   * when Google sign-in is not set up there. A client ID is public by design
+   * (it is in every Google sign-in page); no secret is involved.
+   */
+  getGoogleClientId: async (): Promise<string | null> => {
+    const response = await apiClient.get<any>(AUTH_ENDPOINTS.APP_CONFIG);
+    const data = response.data?.data || response.data;
+    const id = data?.sign_in?.google_server_client_id;
+    return typeof id === "string" && id.endsWith(".apps.googleusercontent.com")
+      ? id
+      : null;
   },
 
   updateProfile: async (

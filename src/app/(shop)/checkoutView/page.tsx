@@ -553,10 +553,23 @@ export default function CheckoutViewPage() {
       return;
     }
 
-    const resolvedContact =
-      !isDummyPhone(selectedAddress.contact) && selectedAddress.contact
-        ? selectedAddress.contact
-        : user?.phone || "0771234567";
+    // A real number the rider can call. An account made with Google has no
+    // phone of its own, so never fall back to a made-up one: ask for it.
+    const resolvedContact = !isDummyPhone(selectedAddress.contact)
+      ? selectedAddress.contact
+      : !isDummyPhone(user?.phone)
+        ? (user?.phone as string)
+        : "";
+    if (!resolvedContact) {
+      addToast({
+        title: "Mobile Number Needed",
+        message:
+          "Please add a mobile number to your delivery address so the rider can reach you.",
+        type: "error",
+      });
+      setIsAddressModalOpen(true);
+      return;
+    }
 
     // WEB_STOREFRONT_API requires contact_phone and alternate_phone to differ
     const altPhone =

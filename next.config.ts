@@ -94,11 +94,14 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
-              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+              // Google sign-in (Identity Services): its script, button
+              // frame, styles and FedCM calls all live under /gsi/.
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://accounts.google.com/gsi/client",
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://accounts.google.com/gsi/style",
+              "frame-src https://accounts.google.com/gsi/",
               "font-src 'self' https://fonts.gstatic.com data:",
               "img-src 'self' data: blob: https://images.unsplash.com https://devapionline.sribees.com https://api.sribeesonline.com",
-              "connect-src 'self' https://devapionline.sribees.com https://api.sribeesonline.com http://localhost:8000 http://localhost:3000",
+              "connect-src 'self' https://accounts.google.com/gsi/ https://devapionline.sribees.com https://api.sribeesonline.com http://localhost:8000 http://localhost:3000",
               "frame-ancestors 'none'",
               "base-uri 'self'",
               "form-action 'self'",

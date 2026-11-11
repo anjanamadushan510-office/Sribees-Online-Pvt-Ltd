@@ -37,6 +37,14 @@ export interface VerifyOtpRequest {
   code: string;
 }
 
+export interface SocialLoginRequest {
+  provider: "google";
+  /** The ID token Google handed the browser; verified by the server. */
+  idToken: string;
+  /** The raw nonce whose SHA-256 went into the sign-in request. */
+  nonce: string;
+}
+
 export interface VerifyOtpResponse {
   success: boolean;
   message: string;

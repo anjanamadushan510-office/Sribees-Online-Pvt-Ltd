@@ -1,6 +1,10 @@
 export const AUTH_ENDPOINTS = {
   REQUEST_OTP: "/auth/phone/request-otp",
   VERIFY_OTP: "/auth/phone/verify-otp",
+  SOCIAL_LOGIN: "/auth/social/login",
+  // Public. Its `sign_in` block names the Google Web client ID, so the ID is
+  // never baked into the build and a new OAuth client needs no web release.
+  APP_CONFIG: "/app/app-config",
   UPDATE_ME: "/auth/me",
   REFRESH_TOKEN: "/auth/refresh",
   LOGOUT: "/auth/logout",

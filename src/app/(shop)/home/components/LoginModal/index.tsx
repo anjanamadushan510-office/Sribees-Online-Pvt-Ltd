@@ -10,6 +10,7 @@ import { useAuthStore } from "@/state/auth.store";
 import {
   useRequestOtp,
   useVerifyOtp,
+  useSocialLogin,
   useUpdateProfile,
 } from "@/api/queries/useAuth";
 import { useSetLocation } from "@/api/queries/useSession";
@@ -29,7 +30,11 @@ import {
   getMissingProfileFields,
 } from "@/utils/profileCompletion";
 import { isSafeRedirectUrl } from "@/utils/urlSecurity";
-import { ProfileField, UpdateProfileRequest } from "@/interfaces/auth.interface";
+import {
+  ProfileField,
+  UpdateProfileRequest,
+  User,
+} from "@/interfaces/auth.interface";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 
 export const LoginModal: React.FC = () => {
@@ -91,12 +96,14 @@ export const LoginModal: React.FC = () => {
   // TanStack Query API Mutations
   const requestOtpMutation = useRequestOtp();
   const verifyOtpMutation = useVerifyOtp();
+  const socialLoginMutation = useSocialLogin();
   const updateProfileMutation = useUpdateProfile();
   const setLocationMutation = useSetLocation();
 
   const isSubmitting =
     requestOtpMutation.isPending ||
     verifyOtpMutation.isPending ||
+    socialLoginMutation.isPending ||
     updateProfileMutation.isPending ||
     setLocationMutation.isPending;
 
@@ -165,6 +172,62 @@ export const LoginModal: React.FC = () => {
     }
   };
 
+  // After any sign-in (OTP or Google): the backend auto registers / logs in
+  // the user. The account is the same one the mobile app uses, so it is asked
+  // only for the fields it still lacks.
+  const continueAfterSignIn = (verifiedUser: User, message?: string) => {
+    setIsLoggedIn(true);
+    const missing = getMissingProfileFields(verifiedUser);
+    setMissingFields(missing);
+    setProfileErrors({});
+    setFullName(verifiedUser?.fullName || "");
+    setNicNumber(verifiedUser?.nic || "");
+    setEmail(verifiedUser?.email || "");
+
+    if (missing.length > 0) {
+      setIsExistingUser(false);
+      setStep("details");
+    } else {
+      setIsExistingUser(true);
+      setStep("address");
+    }
+
+    addToast({
+      title: "Authenticated",
+      message: message || "Logged in successfully!",
+      type: "success",
+    });
+  };
+
+  // Google sign-in: the ID token goes to the server, which verifies it
+  // against Google's keys and the nonce before opening a session.
+  const handleGoogleCredential = async (idToken: string, nonce: string) => {
+    try {
+      const response = await socialLoginMutation.mutateAsync({
+        provider: "google",
+        idToken,
+        nonce,
+      });
+      if (!response.tokens?.accessToken) {
+        throw new Error("Google sign-in did not complete. Please try again.");
+      }
+      continueAfterSignIn(response.user, response.message);
+    } catch (err: unknown) {
+      const error = err as {
+        response?: { data?: { detail?: string } };
+        message?: string;
+      };
+      addToast({
+        title: "Google Sign-in Failed",
+        message:
+          (typeof error?.response?.data?.detail === "string"
+            ? error.response.data.detail
+            : "") || "Google sign-in did not complete. Please try again.",
+        type: "error",
+      });
+    }
+  };
+
   // Step 2: Verify OTP Handler
   const handleVerifyOtp = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -182,31 +245,7 @@ export const LoginModal: React.FC = () => {
         code,
       });
 
-      setIsLoggedIn(true);
-
-      // Backend auto registers / logs in user. The account is the same one the
-      // mobile app uses, so it is asked only for the fields it still lacks.
-      const verifiedUser = response.user;
-      const missing = getMissingProfileFields(verifiedUser);
-      setMissingFields(missing);
-      setProfileErrors({});
-      setFullName(verifiedUser?.fullName || "");
-      setNicNumber(verifiedUser?.nic || "");
-      setEmail(verifiedUser?.email || "");
-
-      if (missing.length > 0) {
-        setIsExistingUser(false);
-        setStep("details");
-      } else {
-        setIsExistingUser(true);
-        setStep("address");
-      }
-
-      addToast({
-        title: "Authenticated",
-        message: response.message || "Logged in successfully!",
-        type: "success",
-      });
+      continueAfterSignIn(response.user, response.message);
     } catch (err: unknown) {
       const error = err as {
         response?: { data?: { detail?: string } };
@@ -522,13 +561,7 @@ export const LoginModal: React.FC = () => {
               setMobileNumber={setMobileNumber}
               isSubmitting={isSubmitting}
               onSendOtp={handleSendOtp}
-              onSocialLogin={() => {
-                if (isExistingUser) {
-                  setStep("address");
-                } else {
-                  setStep("details");
-                }
-              }}
+              onGoogleCredential={handleGoogleCredential}
             />
           ) : step === "otp" ? (
             <OTPScreen

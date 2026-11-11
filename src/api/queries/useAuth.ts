@@ -5,6 +5,7 @@ import {
   RequestOtpResponse,
   VerifyOtpRequest,
   VerifyOtpResponse,
+  SocialLoginRequest,
   UpdateProfileRequest,
   UpdateProfileResponse,
 } from "@/interfaces/auth.interface";
@@ -25,6 +26,21 @@ export const useVerifyOtp = () => {
     mutationFn: (data: VerifyOtpRequest) => authService.verifyOtp(data),
     onSuccess: (res) => {
       if (res.user && res.tokens) {
+        setAuth(res.user, res.tokens);
+        queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.AUTH_ME] });
+      }
+    },
+  });
+};
+
+export const useSocialLogin = () => {
+  const { setAuth } = useAuthStore();
+  const queryClient = useQueryClient();
+
+  return useMutation<VerifyOtpResponse, Error, SocialLoginRequest>({
+    mutationFn: (data: SocialLoginRequest) => authService.socialLogin(data),
+    onSuccess: (res) => {
+      if (res.user && res.tokens?.accessToken) {
         setAuth(res.user, res.tokens);
         queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.AUTH_ME] });
       }
