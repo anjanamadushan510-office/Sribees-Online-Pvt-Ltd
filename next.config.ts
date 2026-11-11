@@ -5,6 +5,18 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const isDev = process.env.NODE_ENV !== "production";
 
+// Product share links (https://www.sribeesonline.com/p/{id}) are served by the
+// backend: it writes the Open Graph tags Facebook and WhatsApp read, draws the
+// preview picture, and sends phones on to the app. The web site only passes
+// them through, so the shared address is the shop's own.
+const apiOrigin = (() => {
+  try {
+    return new URL(process.env.NEXT_PUBLIC_API_URL?.trim() || "").origin;
+  } catch {
+    return "";
+  }
+})();
+
 const nextConfig: NextConfig = {
   reactCompiler: true,
   images: {
@@ -31,6 +43,21 @@ const nextConfig: NextConfig = {
           ]
         : []),
     ],
+  },
+  async rewrites() {
+    if (!apiOrigin) return [];
+    return [
+      { source: "/p/:path*", destination: `${apiOrigin}/p/:path*` },
+      // App Links / Universal Links proof, so the app opens www links itself.
+      {
+        source: "/.well-known/assetlinks.json",
+        destination: `${apiOrigin}/.well-known/assetlinks.json`,
+      },
+      {
+        source: "/.well-known/apple-app-site-association",
+        destination: `${apiOrigin}/.well-known/apple-app-site-association`,
+      },
+    ];
   },
   async redirects() {
     return [
