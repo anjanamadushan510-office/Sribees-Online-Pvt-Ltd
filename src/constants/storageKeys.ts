@@ -5,4 +5,5 @@ export const STORAGE_KEYS = {
   LOCATION_DATA: "sribees_location_data",
   RECENTLY_VIEWED: "sribees_recently_viewed",
   MOBILE_APP_BANNER_DISMISSED: "sribees_mobile_app_banner_dismissed",
+  WEB_PRESENCE_ID: "sribees_web_presence_id",
 } as const;

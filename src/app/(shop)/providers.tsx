@@ -6,6 +6,7 @@ import { AiChatWidget } from "@/components/common/AiChatWidget";
 import { ToastContainer } from "@/components/Toast";
 import { LocationModal } from "@/components/LocationModal";
 import { UserLocationInitializer } from "@/components/UserLocationInitializer";
+import { WebPresence } from "@/components/WebPresence";
 import { useAuthStore } from "@/state/auth.store";
 import { useSessionStore } from "@/state/session.store";
 
@@ -33,6 +34,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <ToastContainer />
       <LocationModal />
       <UserLocationInitializer />
+      <WebPresence />
       <AiChatWidget />
     </QueryClientProvider>
   );

@@ -1514,6 +1514,18 @@ event: error    data: {"code":"TIMEOUT" | "AI_UNAVAILABLE" | "INTERNAL", "messag
 
 Limits: 12 messages per minute; one turn at a time per session (`409` if another is in progress); a turn that takes over 55 seconds fails with `503`.
 
+### 15.6 Presence heartbeat (who is on the web store)
+
+```http
+POST /app/usage/heartbeat
+```
+
+```json
+{ "device_id": "web_3f2b9c1e-...", "event": "open", "foreground_seconds": 0, "platform": "web" }
+```
+
+Works for guests; send the Bearer token when signed in (the customer is read from the token, never the body). `device_id` is one id per browser (`web_` + a UUID kept in localStorage; 8-80 chars of `A-Z a-z 0-9 _ . : -`). `event` is `open` when the tab comes on screen, `beat` every 2 minutes while it stays on screen, `background` when it is hidden or closed. `foreground_seconds` is the time the tab was visible since the previous report (capped at 3600 per report). Answers `202`. Unknown fields are rejected (`422`). The server names the browser from its User-Agent. Feeds the Super Admin "App Users" page (Web filter). The store does this in `src/hooks/useWebPresence.ts`.
+
 ---
 
 ## 16. Endpoint index
@@ -1588,6 +1600,7 @@ Limits: 12 messages per minute; one turn at a time per session (`409` if another
 | POST | `/chat/message`, `/chat/message/stream` | G/U | 15.5 |
 | POST | `/chat/confirm` | U | 15.5 |
 | GET, DELETE | `/chat/history` | G/U | 15.5 |
+| POST | `/app/usage/heartbeat` | G/U | 15.6 |
 
 ---
 
