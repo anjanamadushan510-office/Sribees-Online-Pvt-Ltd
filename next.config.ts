@@ -61,6 +61,16 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // referral.sribeesonline.com is a short, shareable door to the referral
+      // dashboard. Login lives in www's localStorage, so we redirect rather than
+      // serve the page on the subdomain (which would force a second sign-in).
+      // Not permanent: keeps the door open to a real subdomain app later.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "referral.sribeesonline.com" }],
+        destination: "https://www.sribeesonline.com/referral",
+        permanent: false,
+      },
       { source: "/home", destination: "/shop", permanent: true },
       { source: "/partner", destination: "/become-partner", permanent: true },
     ];
