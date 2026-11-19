@@ -1,3 +1,4 @@
+import { logActivity } from "@/lib/activity";
 import { apiClient } from "@/utils/apiClient";
 import { WISHLIST_ENDPOINTS } from "../endpoints/wishlist.endpoint";
 import {
@@ -74,6 +75,7 @@ export const wishlistService = {
    * Add specific product item to wishlist
    */
   addToWishlist: async (payload: AddWishlistPayload): Promise<any> => {
+    logActivity("wishlist_add", { productId: payload.product_id });
     const response = await apiClient.post(WISHLIST_ENDPOINTS.ADD_WISHLIST, payload);
     return response.data?.data || response.data;
   },
@@ -85,6 +87,7 @@ export const wishlistService = {
     productId: string,
     variantId?: string
   ): Promise<void> => {
+    logActivity("wishlist_remove", { productId, props: { variant_id: variantId ?? null } });
     await apiClient.delete(WISHLIST_ENDPOINTS.REMOVE_WISHLIST(productId), {
       params: variantId ? { variant_id: variantId } : undefined,
     });

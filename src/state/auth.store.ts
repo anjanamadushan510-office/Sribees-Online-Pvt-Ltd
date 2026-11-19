@@ -1,3 +1,4 @@
+import { flushActivity, logActivity } from "@/lib/activity";
 import { create } from "zustand";
 import { User, AuthTokens } from "@/interfaces/auth.interface";
 import { STORAGE_KEYS } from "@/constants/storageKeys";
@@ -25,6 +26,9 @@ export const useAuthStore = create<AuthStore>((set) => ({
   isInitialized: false,
 
   setAuth: (user, tokens) => {
+    // Guest browsing leaves as the guest's before the new token is stored.
+    const wasSignedIn = typeof window !== "undefined" && !!localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
+    if (!wasSignedIn) flushActivity();
     if (typeof window !== "undefined") {
       if (tokens.accessToken) {
         localStorage.setItem(STORAGE_KEYS.ACCESS_TOKEN, tokens.accessToken);
@@ -43,6 +47,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
       isAuthenticated: !!tokens.accessToken,
       isInitialized: true,
     });
+    if (!wasSignedIn && tokens.accessToken) logActivity("sign_in");
   },
 
   setUser: (user) => {
@@ -70,6 +75,8 @@ export const useAuthStore = create<AuthStore>((set) => ({
   },
 
   logout: () => {
+    logActivity("sign_out");
+    flushActivity();
     if (typeof window !== "undefined") {
       localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN);
       localStorage.removeItem(STORAGE_KEYS.REFRESH_TOKEN);

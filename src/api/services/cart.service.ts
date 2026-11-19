@@ -1,3 +1,4 @@
+import { logActivity } from "@/lib/activity";
 import { apiClient } from "@/utils/apiClient";
 import { CART_ENDPOINTS } from "../endpoints/cart.endpoint";
 import {
@@ -19,6 +20,10 @@ export const cartService = {
   },
 
   addItem: async (payload: AddToCartPayload): Promise<ApiCart> => {
+    logActivity("add_to_cart", {
+      productId: payload.product_id,
+      props: { qty: payload.quantity, variant_id: payload.variant_id ?? null },
+    });
     const response = await apiClient.post<GetCartResponse>(
       CART_ENDPOINTS.CART_ITEMS,
       payload
@@ -31,6 +36,7 @@ export const cartService = {
     quantity: number,
     variantId?: string | null
   ): Promise<ApiCart> => {
+    logActivity("cart_qty", { productId, props: { to: quantity, variant_id: variantId ?? null } });
     const query = variantId ? `?variant_id=${variantId}` : "";
     const response = await apiClient.put<GetCartResponse>(
       `${CART_ENDPOINTS.CART_ITEM_BY_ID(productId)}${query}`,
@@ -43,6 +49,7 @@ export const cartService = {
     productId: string,
     variantId?: string | null
   ): Promise<ApiCart> => {
+    logActivity("remove_from_cart", { productId, props: { variant_id: variantId ?? null } });
     const query = variantId ? `?variant_id=${variantId}` : "";
     const response = await apiClient.delete<GetCartResponse>(
       `${CART_ENDPOINTS.CART_ITEM_BY_ID(productId)}${query}`

@@ -1,3 +1,4 @@
+import { logActivity } from "@/lib/activity";
 import { apiClient } from "@/utils/apiClient";
 import { ORDER_ENDPOINTS } from "../endpoints/order.endpoint";
 import {
@@ -46,10 +47,15 @@ export const orderService = {
   createOrder: async (
     payload: CreateOrderPayload
   ): Promise<CreateOrderResponse["data"]> => {
+    logActivity("checkout_step", { props: { step: "place_tapped" } });
     const response = await apiClient.post<CreateOrderResponse>(
       ORDER_ENDPOINTS.ORDERS,
       payload
     );
+    const created = response.data.data as { order_id?: string } | undefined;
+    logActivity("checkout_step", {
+      props: { step: "placed", order_id: created?.order_id ?? null, payment_method: payload.payment_method ?? null },
+    });
     return response.data.data;
   },
 

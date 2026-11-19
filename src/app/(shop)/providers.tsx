@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { WebActivity } from "@/components/WebActivity";
+import React, { Suspense, useState, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AiChatWidget } from "@/components/common/AiChatWidget";
 import { ToastContainer } from "@/components/Toast";
@@ -35,6 +36,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
       <LocationModal />
       <UserLocationInitializer />
       <WebPresence />
+      {/* useSearchParams needs a Suspense boundary in the app router. */}
+      <Suspense fallback={null}>
+        <WebActivity />
+      </Suspense>
       <AiChatWidget />
     </QueryClientProvider>
   );

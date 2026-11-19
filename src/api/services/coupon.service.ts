@@ -1,3 +1,4 @@
+import { logActivity } from "@/lib/activity";
 import { apiClient } from "@/utils/apiClient";
 import { COUPON_ENDPOINTS } from "../endpoints/coupon.endpoint";
 import {
@@ -20,6 +21,7 @@ export const couponService = {
   },
 
   collectCoupon: async (code: string): Promise<CouponCard> => {
+    logActivity("coupon_collect", { props: { code } });
     const response = await apiClient.post<CollectCouponResponse>(
       COUPON_ENDPOINTS.COLLECT,
       { code }

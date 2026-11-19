@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ShieldCheck, CreditCard, Truck, UserCheck, Lock, CheckCircle2 } from "lucide-react";
+import { ShieldCheck, CreditCard, Truck, UserCheck, Lock, CheckCircle2, Eye } from "lucide-react";
 
 export const PrivacyCards: React.FC = () => {
   return (
@@ -122,6 +122,21 @@ export const PrivacyCards: React.FC = () => {
           </div>
           <p className="text-xs text-slate-600 leading-relaxed">
             You have full control over your information. You can edit saved addresses, update your preferences, or delete your account anytime directly from your Account Settings.
+          </p>
+        </div>
+
+        {/* How the store is used (activity log, 2026-11-19) */}
+        <div className="bg-white rounded-2xl p-5 border border-slate-200/70 shadow-2xs space-y-2 sm:col-span-2">
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+              <Eye className="w-4 h-4" />
+            </div>
+            <h3 className="text-sm font-bold text-slate-900">
+              How You Use the Store
+            </h3>
+          </div>
+          <p className="text-xs text-slate-600 leading-relaxed">
+            To improve the shop, we record how you use the website and app: the pages you open and for how long, the products and photos you look at, your searches and your cart changes, including before you sign in. Once you sign in it is linked to your account, and it is deleted when you close your account. It never includes passwords, sign-in codes or card details.
           </p>
         </div>
       </div>
