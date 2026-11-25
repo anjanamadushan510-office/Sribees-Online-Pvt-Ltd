@@ -53,6 +53,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       openLoginModal();
       return;
     }
+    // A product in shades / colours: the shade is chosen on its page.
+    if (product.option_label) {
+      handleCardClick();
+      return;
+    }
     addToCartMutation.mutate({
       product_id: productId,
       quantity: 1,

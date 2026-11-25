@@ -101,7 +101,21 @@
     "submissionFailedMsg": "Could not submit review. Please try again.",
     "onlyBuyersCanReview": "Only verified buyers who purchased this product can write a review.",
     "verifiedBuyerOnly": "Verified Buyers Only",
-    "reviewInOrderHistory": "You can also review this item directly from your Order History invoice."
+    "reviewInOrderHistory": "You can also review this item directly from your Order History invoice.",
+    "chooseOption": "Choose a {label}",
+    "optionPicked": "{label}: {name}",
+    "pickOptionFirst": "Please choose a {label} first",
+    "pickOptionTitle": "Choose one",
+    "optionSoldOut": "{name} is sold out",
+    "optionWords": {
+      "shade": "shade",
+      "colour": "colour",
+      "color": "colour",
+      "size": "size",
+      "flavour": "flavour",
+      "scent": "scent",
+      "option": "option"
+    }
   },
   "filters": {
     "categories": "Categories",

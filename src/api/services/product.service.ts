@@ -1,6 +1,6 @@
 import { apiClient } from "@/utils/apiClient";
 import { PRODUCT_ENDPOINTS } from "../endpoints/product.endpoint";
-import { Product, ProductFilterParams } from "@/interfaces/product.interface";
+import { Product, ProductFilterParams, ProductOption } from "@/interfaces/product.interface";
 import { SearchResult, SearchPagination } from "@/interfaces/search.interface";
 import { sanitizeSearchQuery } from "@/utils/sanitize";
 import { categoryService } from "./category.service";
@@ -135,6 +135,13 @@ export function mapApiProductToProduct(raw: any): Product {
     sku: raw.sku || "",
     has_variants: Boolean(raw.has_variants),
     variants: Array.isArray(raw.variants) ? raw.variants : [],
+    option_label: raw.option_label ?? null,
+    options: Array.isArray(raw.options)
+      ? raw.options.map((o: ProductOption) => ({
+          ...o,
+          image_url: o.image_url ? formatImageUrl(o.image_url) : null,
+        }))
+      : [],
     reviews: Array.isArray(raw.reviews)
       ? raw.reviews.map((r: any, idx: number) => ({
           id: r.id || r.review_id || `rev-${idx}`,

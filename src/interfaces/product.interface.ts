@@ -35,6 +35,24 @@ export interface ProductVariant {
   is_active: boolean;
 }
 
+/**
+ * One shade / colour of a product with options (backend migration 123),
+ * priced and counted for the shopper's branch by the server.
+ */
+export interface ProductOption {
+  variant_id: string;
+  name: string;
+  /** null = the product's photo. */
+  image_url: string | null;
+  /** What the customer pays (after the product's discount). */
+  price: number;
+  /** Before any discount. */
+  original_price: number;
+  has_own_price?: boolean;
+  /** How many can still be sold; null = not tracked in the branch. */
+  available: number | null;
+}
+
 export interface Product {
   id: string;
   product_id?: string;
@@ -79,6 +97,10 @@ export interface Product {
   sku?: string;
   has_variants?: boolean;
   variants?: ProductVariant[];
+  /** "Shade" / "Colour": the shopper must pick one of [options]. */
+  option_label?: string | null;
+  /** Only on the product detail read. */
+  options?: ProductOption[];
   reviews?: Review[];
 }
 

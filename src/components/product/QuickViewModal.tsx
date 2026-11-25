@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import {
   Star,
   Plus,
@@ -74,6 +75,7 @@ export const QuickViewModal: React.FC = () => {
   const { isAuthenticated } = useAuthStore();
   const { addToast } = useToastStore();
   const addToCartMutation = useAddToCart();
+  const router = useRouter();
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
   const [activeTab, setActiveTab] = useState<"details" | "reviews">("details");
@@ -114,6 +116,12 @@ export const QuickViewModal: React.FC = () => {
       return;
     }
     const productId = quickViewProduct.id || quickViewProduct.product_id || "";
+    // A product in shades / colours: the shade is chosen on its page.
+    if (quickViewProduct.option_label) {
+      setQuickViewProduct(null);
+      router.push(`/productView?id=${productId}`);
+      return;
+    }
     addToCartMutation.mutate({
       product_id: productId,
       quantity,

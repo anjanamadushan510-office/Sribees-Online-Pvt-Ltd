@@ -34,6 +34,10 @@ function ProductViewContent() {
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
     null,
   );
+  // The picked shade's own photo leads the gallery (backend migration 123),
+  // kept with the product it belongs to so another product never shows it.
+  const [optionPhoto, setOptionPhoto] = useState<{ id: string; url: string | null } | null>(null);
+  const optionImage = optionPhoto?.id === productId ? optionPhoto.url : null;
 
   if (productLoading) {
     return (
@@ -113,11 +117,13 @@ function ProductViewContent() {
         <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-xs grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           <ProductGallery
             product={product}
-            selectedImage={selectedVariant?.image_url}
+            selectedImage={optionImage ?? selectedVariant?.image_url}
           />
           <ProductDetailsInfo
+            key={productId}
             product={product}
             onVariantChange={(variant) => setSelectedVariant(variant)}
+            onOptionImageChange={(url) => setOptionPhoto({ id: productId, url })}
           />
         </div>
 

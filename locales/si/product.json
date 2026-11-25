@@ -101,7 +101,21 @@
     "submissionFailedMsg": "අදහස යොමු කිරීමට නොහැකි විය. කරුණාකර නැවත උත්සාහ කරන්න.",
     "onlyBuyersCanReview": "මෙම භාණ්ඩය මිලදී ගත් පාරිභෝගිකයින්ට පමණක් අදහස් දැක්විය හැක.",
     "verifiedBuyerOnly": "මිලදී ගත් පාරිභෝගිකයින්ට පමණි",
-    "reviewInOrderHistory": "ඔබේ ඇණවුම් ඉතිහාසයේ ඉන්වොයිසියෙන්ද මෙම භාණ්ඩය සඳහා අදහස් දැක්විය හැක."
+    "reviewInOrderHistory": "ඔබේ ඇණවුම් ඉතිහාසයේ ඉන්වොයිසියෙන්ද මෙම භාණ්ඩය සඳහා අදහස් දැක්විය හැක.",
+    "chooseOption": "{label} එකක් තෝරන්න",
+    "optionPicked": "{label}: {name}",
+    "pickOptionFirst": "කරුණාකර මුලින් {label} එකක් තෝරන්න",
+    "pickOptionTitle": "එකක් තෝරන්න",
+    "optionSoldOut": "{name} අවසන්",
+    "optionWords": {
+      "shade": "පාට",
+      "colour": "පාට",
+      "color": "පාට",
+      "size": "ප්‍රමාණය",
+      "flavour": "රසය",
+      "scent": "සුවඳ",
+      "option": "වර්ගය"
+    }
   },
   "filters": {
     "categories": "වර්ග",

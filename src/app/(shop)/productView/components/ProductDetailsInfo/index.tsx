@@ -16,7 +16,12 @@ import {
   CheckCircle2,
   XCircle,
 } from "lucide-react";
-import { Product, ProductVariant } from "@/interfaces/product.interface";
+import {
+  Product,
+  ProductOption,
+  ProductVariant,
+} from "@/interfaces/product.interface";
+import { ProductOptionPicker, useOptionWord } from "../ProductOptionPicker";
 import { formatLKR } from "@/utils/formatCurrency";
 import { useCartStore } from "@/state/cart.store";
 import { useAuthStore } from "@/state/auth.store";
@@ -26,6 +31,8 @@ import { useAddToCart } from "@/api/queries/useCart";
 import { useTranslations } from "next-intl";
 
 const resolveDefaultVariant = (product: Product): ProductVariant | null => {
+  // A product in shades is never pre-picked: the shopper chooses (options).
+  if (product.option_label) return null;
   if (
     !product.has_variants ||
     !product.variants ||
@@ -212,11 +219,14 @@ const getActivePricing = (
 interface ProductDetailsInfoProps {
   product: Product;
   onVariantChange?: (variant: ProductVariant | null) => void;
+  /** The picked shade's own photo (null = the product's). */
+  onOptionImageChange?: (imageUrl: string | null) => void;
 }
 
 export const ProductDetailsInfo: React.FC<ProductDetailsInfoProps> = ({
   product,
   onVariantChange,
+  onOptionImageChange,
 }) => {
   const t = useTranslations("product");
   const tCommon = useTranslations("common");
@@ -245,14 +255,44 @@ export const ProductDetailsInfo: React.FC<ProductDetailsInfoProps> = ({
   const [quantity, setQuantity] = useState(1);
   const [addedAnimation, setAddedAnimation] = useState(false);
 
+  // Shades / colours (backend migration 123): priced and counted by the server.
+  const shades: ProductOption[] =
+    product.option_label && product.options ? product.options : [];
+  const [pickedId, setPickedId] = useState<string | null>(null);
+  const picked = shades.find((o) => o.variant_id === pickedId) || null;
+  const optionWord = useOptionWord(product.option_label);
+  const handlePickOption = (option: ProductOption) => {
+    setPickedId(option.variant_id);
+    setQuantity(1);
+    if (onOptionImageChange) onOptionImageChange(option.image_url);
+  };
+
   // Active pricing and specs calculated with discount priority
+  const variantPricing = getActivePricing(product, selectedVariant);
+  const optionPricing = picked
+    ? {
+        activePrice: picked.price,
+        activeCompareAtPrice:
+          picked.original_price > picked.price ? picked.original_price : undefined,
+        discountAmount:
+          Math.round(Math.max(0, picked.original_price - picked.price) * 100) / 100,
+        discountPercent:
+          picked.original_price > picked.price
+            ? Math.round(
+                ((picked.original_price - picked.price) / picked.original_price) * 100,
+              )
+            : 0,
+      }
+    : null;
   const { activePrice, activeCompareAtPrice, discountAmount, discountPercent } =
-    getActivePricing(product, selectedVariant);
+    optionPricing ?? variantPricing;
 
   const activeSku = selectedVariant?.sku || product.sku || "";
-  const activeStock = selectedVariant
-    ? selectedVariant.stock_quantity
-    : (product.stock_quantity ?? 0);
+  const activeStock = picked
+    ? (picked.available ?? product.stock_quantity ?? 0)
+    : selectedVariant
+      ? selectedVariant.stock_quantity
+      : (product.stock_quantity ?? 0);
   const inStock = activeStock > 0 && product.inStock;
 
   const categoryName = product.category_info?.name || product.category;
@@ -318,7 +358,32 @@ export const ProductDetailsInfo: React.FC<ProductDetailsInfoProps> = ({
       return;
     }
 
+    if (shades.length > 0 && !picked) {
+      addToast({
+        title: t("details.pickOptionTitle"),
+        message: t("details.pickOptionFirst", { label: optionWord }),
+        type: "info",
+      });
+      return;
+    }
+
     const productId = product.id || product.product_id || "";
+    if (picked) {
+      addToCartMutation.mutate({
+        product_id: productId,
+        variant_id: picked.variant_id,
+        quantity,
+        name: `${product.title || product.name} (${picked.name})`,
+        price: activePrice,
+        image: picked.image_url || product.image || "",
+        sku: activeSku,
+        original_price: activeCompareAtPrice || undefined,
+        cashback_percentage: product.cashback_percentage || undefined,
+      });
+      setAddedAnimation(true);
+      setTimeout(() => setAddedAnimation(false), 1500);
+      return;
+    }
     const itemName = selectedVariant
       ? `${product.title || product.name} (${selectedVariant.name})`
       : product.title || product.name || "";
@@ -347,6 +412,10 @@ export const ProductDetailsInfo: React.FC<ProductDetailsInfoProps> = ({
         type: "warning",
       });
       openLoginModal("/checkoutView");
+      return;
+    }
+    if (shades.length > 0 && !picked) {
+      handleAddToCart(); // explains that a shade must be chosen
       return;
     }
     handleAddToCart();
@@ -459,6 +528,16 @@ export const ProductDetailsInfo: React.FC<ProductDetailsInfoProps> = ({
           )}
         </div>
       </div>
+
+      {shades.length > 0 && (
+        <ProductOptionPicker
+          label={product.option_label || ""}
+          options={shades}
+          selectedId={pickedId}
+          fallbackImage={product.image}
+          onSelect={handlePickOption}
+        />
+      )}
 
       {/* Product Details Chips */}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
